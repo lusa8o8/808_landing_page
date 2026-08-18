@@ -59,8 +59,8 @@ The following material is absent or unverified:
 - Named or anonymized projects with permission, measurable outcomes, dates, and attribution.
 - Articles or an editorial owner and publishing cadence.
 - Founder/team story, legal business identity, operating history, and approved brand narrative.
-- A confirmed WhatsApp number. The current `260977000000` links are documented placeholders.
-- Confirmation that Cloudflare routing for `hello@eightzeroeight.online` is active and monitored. The private forwarding destination must not be published or committed.
+- The current source still contains the placeholder WhatsApp number `260977000000`; implementation must replace it with the approved public number `+260 969 538 047` (`https://wa.me/260969538047`).
+- Confirmation that Cloudflare routing for `lusa@eightzeroeight.online` is active and monitored. The private forwarding destination must not be published or committed.
 - Business hours, expected response time, physical address, or service-area boundaries beyond Lusaka.
 - Approved logo/social-share artwork and owned replacement photography for the Unsplash placeholders.
 - Analytics provider, consent policy, and conversion-event ownership.
@@ -91,7 +91,7 @@ Do not add Industries, Case studies, or Insights to the primary navigation until
 | `/services/service-and-pricing-pages` | Prepare next | Partial | Define deliverables, update ownership, and relationship to a broader website build |
 | `/calculator` | Launch in the first route release | Ready | Give the existing calculator standalone explanatory copy and retain the home-page version |
 | `/about` | Launch after owner input | Blocked on copy | Company story, owner/team representation, operating model, values, and approved claims |
-| `/contact` | Launch after owner input | Blocked on facts | Real WhatsApp number, working `hello@eightzeroeight.online` routing, response expectations, and form delivery/abuse controls |
+| `/contact` | Launch after remaining owner input | Partial | Working `lusa@eightzeroeight.online` routing, response expectations, and form delivery/abuse controls; WhatsApp is approved |
 | `/industries` | Hold until at least three entries are complete | Thin | Prioritize industries and provide distinct, useful copy for each |
 | `/industries/[slug]` | Content-gated | Not ready | Industry-specific problems, recommended systems, FAQs, boundaries, and proof where available |
 | `/case-studies` | Do not publish empty | Not ready | At least one approved case study with evidence and disclosure/consent decisions |
@@ -233,18 +233,19 @@ Approved on 2026-08-18:
 
 - Launch `/`, `/services`, `/calculator`, `/about`, and `/contact`; hold incomplete route families back.
 - Use the service names and slugs `booking-systems`, `local-search-and-maps`, and `service-and-pricing-pages`.
-- Publish `hello@eightzeroeight.online` as the email alias after Cloudflare routing is verified. Keep its private forwarding destination out of the site and repository.
+- Publish `lusa@eightzeroeight.online` as the email alias after Cloudflare routing is verified. Keep its private forwarding destination out of the site and repository.
+- Use `+260 969 538 047` as the public WhatsApp contact and normalize links to `https://wa.me/260969538047`.
 - Make a contact form available as an optional secondary channel rather than the only way to contact 808. Direct email and WhatsApp actions remain visible.
 - Keep the broad market position focused on service businesses; industry pages are examples and search entry points, not exclusions.
+- Prioritize `/industries/clinics`, `/industries/salons-and-barbershops`, and `/industries/professional-services` as the first three industry pages.
 
 Still required before implementation sign-off:
 
-1. **Industry shortlist:** approve or amend clinics, salons and barbershops, and professional services as the first three content priorities.
-2. **Contact facts:** provide the real WhatsApp number, confirm the email route is live, and approve a response expectation.
-3. **Contact form:** choose its delivery path. It should collect only the minimum reply details and short enquiry, remain optional, and ship with server-side validation, rate limiting, anti-automation controls, and a clear privacy notice.
-4. **Company facts:** provide the approved short company story, who should be represented on the About page, service area, and any legal/business identity that may be published.
-5. **Indexing:** approve keeping production `noindex` until the route/content/SEO release gate passes, followed by a deliberate Cloudflare and application indexing change.
+1. **Contact operations:** confirm the Cloudflare email route is live and approve a response expectation.
+2. **Contact form:** choose its delivery path. It should collect only the minimum reply details and short enquiry, remain optional, and ship with server-side validation, rate limiting, anti-automation controls, and a clear privacy notice.
+3. **Company facts:** provide the approved short company story, who should be represented on the About page, service area, and any legal/business identity that may be published.
+4. **Indexing:** approve keeping production `noindex` until the route/content/SEO release gate passes, followed by a deliberate Cloudflare and application indexing change.
 
 ## Phase 3 discovery sign-off condition
 
-Discovery is complete when the owner approves the launch set, service naming, contact/company facts, first industry priorities, and indexing checkpoint. Implementation can then proceed without inventing business facts or publishing thin pages.
+Discovery is complete when the owner confirms email routing and response expectations, supplies the remaining company facts, chooses the form delivery path, and approves the indexing checkpoint. Implementation can then proceed without inventing business facts or publishing thin pages.
