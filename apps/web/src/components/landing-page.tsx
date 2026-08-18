@@ -128,8 +128,8 @@ function BuiltToBeFoundSection() {
           Built to be booked.
         </h2>
         <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-          We build booking systems that pay for themselves in your first few clients. No flash.
-          Just infrastructure that works.
+          We build practical booking and discovery systems around how customers find, understand,
+          and contact your business. No flash. Just infrastructure that works.
         </p>
       </div>
     </section>
