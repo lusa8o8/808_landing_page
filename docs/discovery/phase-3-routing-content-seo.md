@@ -242,6 +242,19 @@ Each slice is a key change and should be committed separately after its checks p
 
 The next implementation slice is the approved services route family and standalone calculator route. Primary navigation should switch from temporary section anchors only when the corresponding route is present and verified.
 
+## Slice 2 implementation handoff
+
+- Completed on 2026-08-18 in commits `bf50a51`, `166ec44`, and `def4fa0`.
+- Expanded the validated service content model with public-facing introductions, best-fit guidance, customer outcomes, typical deliverables, explicit boundaries, FAQs, and publication status. Nested content and slug uniqueness are checked at startup and covered by 14 tests.
+- Added the statically rendered `/services` index and the three approved detail routes: `/services/booking-systems`, `/services/local-search-and-maps`, and `/services/service-and-pricing-pages`.
+- Restricted dynamic service params to published records and added route-specific titles and descriptions through `generateMetadata()`. Full canonical, social, structured-data, sitemap, and robots work remains in the later SEO slice.
+- Added the standalone `/calculator` route with the existing guarded LTV agent, deterministic calculation display, transparent formula explanation, and a planning-estimate disclaimer.
+- Switched primary navigation to the verified `/services` and `/calculator` routes. Contact intentionally remains `/#contact` until the dedicated contact route and its operating decisions are complete.
+- Preserved production `noindex, nofollow`; this slice does not authorize search indexing.
+- Verification passed: 14 web/agent tests, web type-check, web lint, production web build, desktop service-index inspection, all three service detail pages, route metadata, mobile navigation, invalid-slug handling, and a live standalone-calculator conversation. The live salon case correctly returned K3,000 from K250 multiplied by 12 annual visits, with no application warnings.
+
+The next implementation slice should cover the approved industry route family. `/about` and `/contact` remain gated by the owner facts, response expectation, and contact-form delivery decisions recorded below.
+
 ## Decision log and remaining approvals
 
 Approved on 2026-08-18:
