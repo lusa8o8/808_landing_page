@@ -60,7 +60,7 @@ The following material is absent or unverified:
 - Articles or an editorial owner and publishing cadence.
 - Founder/team story, legal business identity, operating history, and approved brand narrative.
 - A confirmed WhatsApp number. The current `260977000000` links are documented placeholders.
-- Confirmation that `hello@808digital.co.zm` is active and monitored.
+- Confirmation that Cloudflare routing for `hello@eightzeroeight.online` is active and monitored. The private forwarding destination must not be published or committed.
 - Business hours, expected response time, physical address, or service-area boundaries beyond Lusaka.
 - Approved logo/social-share artwork and owned replacement photography for the Unsplash placeholders.
 - Analytics provider, consent policy, and conversion-event ownership.
@@ -91,7 +91,7 @@ Do not add Industries, Case studies, or Insights to the primary navigation until
 | `/services/service-and-pricing-pages` | Prepare next | Partial | Define deliverables, update ownership, and relationship to a broader website build |
 | `/calculator` | Launch in the first route release | Ready | Give the existing calculator standalone explanatory copy and retain the home-page version |
 | `/about` | Launch after owner input | Blocked on copy | Company story, owner/team representation, operating model, values, and approved claims |
-| `/contact` | Launch after owner input | Blocked on facts | Real WhatsApp number, confirmed email, response expectations, and chosen form scope |
+| `/contact` | Launch after owner input | Blocked on facts | Real WhatsApp number, working `hello@eightzeroeight.online` routing, response expectations, and form delivery/abuse controls |
 | `/industries` | Hold until at least three entries are complete | Thin | Prioritize industries and provide distinct, useful copy for each |
 | `/industries/[slug]` | Content-gated | Not ready | Industry-specific problems, recommended systems, FAQs, boundaries, and proof where available |
 | `/case-studies` | Do not publish empty | Not ready | At least one approved case study with evidence and disclosure/consent decisions |
@@ -100,6 +100,16 @@ Do not add Industries, Case studies, or Insights to the primary navigation until
 | `/insights/[slug]` | Content-gated | Not ready | Authored article content, publication metadata, and update policy |
 
 Unknown dynamic slugs should call `notFound()`. Locally controlled collections should use `generateStaticParams()` and reject unrecognized slugs rather than creating arbitrary runtime pages.
+
+### Recommended first industry archetypes
+
+808 should remain positioned for service businesses rather than presenting itself as a vertical-only agency. The first industry pages should represent three common service-business operating models:
+
+1. **Clinics** (`/industries/clinics`) — appointment-led, locally discovered, repeat-client businesses where one retained client can have meaningful annual value. Copy must avoid medical or compliance claims, and 808 must not imply that a public booking layer is a clinical records system.
+2. **Salons and barbershops** (`/industries/salons-and-barbershops`) — frequent repeat visits, mobile-first customers, clear services/pricing, and direct booking make this the simplest demonstration of the current offer.
+3. **Professional services** (`/industries/professional-services`) — law firms, accountants, consultants, and similar appointment/lead-driven firms benefit from local trust, clear service presentation, and structured enquiries. Copy should not force public pricing where the work requires consultation.
+
+These are go-to-market entry points, not product boundaries. Guesthouses should follow after accommodation inventory, OTA, payment, and availability-integration scope is clear. Schools have a different admissions/enquiry workflow, and franchises introduce multi-location governance that should not be implied by the initial offer.
 
 ## Content architecture proposal
 
@@ -217,16 +227,23 @@ Do not send calculator message text, business descriptions, contact content, or 
 
 Each slice is a key change and should be committed separately after its checks pass.
 
-## Approval decisions required
+## Decision log and remaining approvals
 
-Before implementation, confirm or provide:
+Approved on 2026-08-18:
 
-1. **Launch routes:** approve the core set `/`, `/services`, `/calculator`, `/about`, and `/contact`, with incomplete route families held back.
-2. **Service names:** approve the proposed service slugs/names or provide the commercial names customers should see.
-3. **Contact facts:** real WhatsApp number, confirmation of the email address, preferred response expectation, and whether `/contact` launches with links only or a form.
-4. **Company facts:** approved short company story, who should be represented on the About page, service area, and any legal/business identity that may be published.
-5. **Industry priority:** rank the first three industries to receive distinct pages; the current labels are clinics, law firms, guesthouses, salons, schools, and franchises.
-6. **Indexing:** approve keeping production `noindex` until the route/content/SEO release gate passes, followed by a deliberate Cloudflare and application indexing change.
+- Launch `/`, `/services`, `/calculator`, `/about`, and `/contact`; hold incomplete route families back.
+- Use the service names and slugs `booking-systems`, `local-search-and-maps`, and `service-and-pricing-pages`.
+- Publish `hello@eightzeroeight.online` as the email alias after Cloudflare routing is verified. Keep its private forwarding destination out of the site and repository.
+- Make a contact form available as an optional secondary channel rather than the only way to contact 808. Direct email and WhatsApp actions remain visible.
+- Keep the broad market position focused on service businesses; industry pages are examples and search entry points, not exclusions.
+
+Still required before implementation sign-off:
+
+1. **Industry shortlist:** approve or amend clinics, salons and barbershops, and professional services as the first three content priorities.
+2. **Contact facts:** provide the real WhatsApp number, confirm the email route is live, and approve a response expectation.
+3. **Contact form:** choose its delivery path. It should collect only the minimum reply details and short enquiry, remain optional, and ship with server-side validation, rate limiting, anti-automation controls, and a clear privacy notice.
+4. **Company facts:** provide the approved short company story, who should be represented on the About page, service area, and any legal/business identity that may be published.
+5. **Indexing:** approve keeping production `noindex` until the route/content/SEO release gate passes, followed by a deliberate Cloudflare and application indexing change.
 
 ## Phase 3 discovery sign-off condition
 
