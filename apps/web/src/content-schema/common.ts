@@ -19,10 +19,21 @@ export interface SiteConfig {
 }
 
 export interface MarketingService {
+  bestFor: string;
+  boundaries: readonly string[];
   description: string;
+  deliverables: readonly string[];
+  faqs: readonly ServiceFaq[];
+  intro: string;
   label: string;
+  outcomes: readonly string[];
   slug: string;
   status: PublicationStatus;
+}
+
+export interface ServiceFaq {
+  answer: string;
+  question: string;
 }
 
 export interface ProcessStep {
@@ -60,6 +71,16 @@ function assertInternalHref(value: string, field: string): void {
 function assertSlug(value: string, field: string): void {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value)) {
     throw new Error(`${field} must be a lowercase URL slug`);
+  }
+}
+
+function assertNonEmptyStringList(values: readonly string[], field: string): void {
+  if (values.length === 0) {
+    throw new Error(`${field} must contain at least one item`);
+  }
+
+  for (const [index, value] of values.entries()) {
+    assertNonEmptyString(value, `${field}[${index}]`);
   }
 }
 
@@ -104,6 +125,28 @@ export function defineMarketingServices(
     assertSlug(service.slug, `services[${index}].slug`);
     assertNonEmptyString(service.label, `services[${index}].label`);
     assertNonEmptyString(service.description, `services[${index}].description`);
+    assertNonEmptyString(service.intro, `services[${index}].intro`);
+    assertNonEmptyString(service.bestFor, `services[${index}].bestFor`);
+    assertNonEmptyStringList(service.outcomes, `services[${index}].outcomes`);
+    assertNonEmptyStringList(service.deliverables, `services[${index}].deliverables`);
+    assertNonEmptyStringList(service.boundaries, `services[${index}].boundaries`);
+
+    if (service.faqs.length === 0) {
+      throw new Error(`services[${index}].faqs must contain at least one item`);
+    }
+
+    const faqQuestions = new Set<string>();
+
+    for (const [faqIndex, faq] of service.faqs.entries()) {
+      assertNonEmptyString(faq.question, `services[${index}].faqs[${faqIndex}].question`);
+      assertNonEmptyString(faq.answer, `services[${index}].faqs[${faqIndex}].answer`);
+
+      if (faqQuestions.has(faq.question)) {
+        throw new Error(`services[${index}].faqs contains duplicate question: ${faq.question}`);
+      }
+
+      faqQuestions.add(faq.question);
+    }
 
     if (slugs.has(service.slug)) {
       throw new Error(`services contains duplicate slug: ${service.slug}`);
@@ -112,7 +155,17 @@ export function defineMarketingServices(
     slugs.add(service.slug);
   }
 
-  return Object.freeze(services.map((service) => Object.freeze({ ...service })));
+  return Object.freeze(
+    services.map((service) =>
+      Object.freeze({
+        ...service,
+        outcomes: Object.freeze([...service.outcomes]),
+        deliverables: Object.freeze([...service.deliverables]),
+        boundaries: Object.freeze([...service.boundaries]),
+        faqs: Object.freeze(service.faqs.map((faq) => Object.freeze({ ...faq }))),
+      }),
+    ),
+  );
 }
 
 export function defineProcessSteps(

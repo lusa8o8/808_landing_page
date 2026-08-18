@@ -3,6 +3,21 @@ import test from "node:test";
 
 import { defineMarketingServices, defineSiteConfig } from "./common.ts";
 
+function serviceFixture(slug: string) {
+  return {
+    slug,
+    label: "Booking systems",
+    description: "A service description",
+    intro: "A longer introduction",
+    bestFor: "Appointment-led service businesses",
+    outcomes: ["A clear customer outcome"],
+    deliverables: ["A scoped deliverable"],
+    boundaries: ["A clear boundary"],
+    faqs: [{ question: "A question?", answer: "A direct answer." }],
+    status: "published" as const,
+  };
+}
+
 test("site configuration rejects non-HTTPS public URLs", () => {
   assert.throws(
     () =>
@@ -26,19 +41,16 @@ test("marketing services reject duplicate slugs", () => {
   assert.throws(
     () =>
       defineMarketingServices([
-        {
-          slug: "booking-systems",
-          label: "Booking systems",
-          description: "First description",
-          status: "draft",
-        },
-        {
-          slug: "booking-systems",
-          label: "Another booking service",
-          description: "Second description",
-          status: "published",
-        },
+        serviceFixture("booking-systems"),
+        { ...serviceFixture("booking-systems"), label: "Another booking service" },
       ]),
     /duplicate slug/,
+  );
+});
+
+test("marketing services reject incomplete publishable records", () => {
+  assert.throws(
+    () => defineMarketingServices([{ ...serviceFixture("booking-systems"), outcomes: [] }]),
+    /outcomes must contain at least one item/,
   );
 });
