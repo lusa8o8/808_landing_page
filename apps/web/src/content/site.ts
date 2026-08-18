@@ -12,8 +12,8 @@ export const siteConfig = defineSiteConfig({
   whatsappDisplay: "+260 969 538 047",
   whatsappHref: "https://wa.me/260969538047",
   navigation: [
-    { label: "Services", href: "/#services" },
-    { label: "Calculator", href: "/#calculator" },
+    { label: "Services", href: "/services" },
+    { label: "Calculator", href: "/calculator" },
     { label: "Contact", href: "/#contact" },
   ],
 });
