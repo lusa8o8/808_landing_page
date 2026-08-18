@@ -227,6 +227,21 @@ Do not send calculator message text, business descriptions, contact content, or 
 
 Each slice is a key change and should be committed separately after its checks pass.
 
+## Slice 1 implementation handoff
+
+- Completed on 2026-08-18 in commits `1d8bc24`, `da1073a`, and `b4f86ca`.
+- Added runtime-validated public site configuration, service summaries, audience labels, and process content without adding a new runtime dependency.
+- Centralized the canonical production origin, public email alias, WhatsApp display number, WhatsApp URL, location, description, and active navigation data.
+- Added a shared marketing route-group layout with responsive header, mobile menu, and shared footer.
+- Kept navigation on existing home-page anchors until the approved routes exist, preventing automatic `main` deployments from exposing broken links.
+- Replaced the placeholder email and WhatsApp destinations throughout the shared footer and calculator result flow.
+- Removed fixed public payback language and replaced the ambiguous ownership statement with individualized commercial and terms-aware language. Confidential internal source material was not copied into the repository.
+- Added branded root not-found and route error experiences with usable recovery actions.
+- Preserved production `noindex, nofollow`; sitemap, robots, canonical-route metadata, and index enablement remain later Phase 3 work.
+- Verification passed: 13 web/agent tests, web type-check, web lint, production web build, desktop/mobile browser inspection, mobile-menu interaction, contact-link inspection, and branded 404 inspection. `/` and `/_not-found` remain statically prerendered.
+
+The next implementation slice is the approved services route family and standalone calculator route. Primary navigation should switch from temporary section anchors only when the corresponding route is present and verified.
+
 ## Decision log and remaining approvals
 
 Approved on 2026-08-18:
