@@ -9,7 +9,7 @@
     "start": "next start --port 3000",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "node --test src/lib/ltv-api.test.ts ../../supabase/functions/ltv-agent/abuse-control.test.ts"
+    "test": "node --test src/content-schema/common.test.ts src/lib/ltv-api.test.ts ../../supabase/functions/ltv-agent/abuse-control.test.ts"
   },
   "dependencies": {
     "lucide-react": "0.487.0",
