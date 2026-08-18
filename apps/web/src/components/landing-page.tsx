@@ -1,7 +1,9 @@
 import Image from "next/image";
-import { Calendar, List, MapPin, type LucideIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 import { LtvChat } from "@/components/ltv-chat";
+import { ServiceIcon } from "@/components/service-icon";
 import { audienceLabels, marketingServices, processSteps } from "@/content/marketing";
 
 const mosaic = [
@@ -42,12 +44,6 @@ const mosaic = [
     rows: 1,
   },
 ] as const;
-
-const serviceIcons: Record<string, LucideIcon> = {
-  "booking-systems": Calendar,
-  "local-search-and-maps": MapPin,
-  "service-and-pricing-pages": List,
-};
 
 function SectionLabel({ children, accent = false }: { children: string; accent?: boolean }) {
   return (
@@ -160,24 +156,27 @@ function ServicesSection() {
           <SectionLabel>What we build</SectionLabel>
         </div>
         <div className="grid overflow-hidden rounded-xl border border-black/8 sm:grid-cols-3">
-          {marketingServices.map(({ slug, label, description }) => {
-            const Icon = serviceIcons[slug];
-
-            return (
+          {marketingServices.map(({ slug, label, description }) => (
               <article
                 key={slug}
-                className="border-b border-black/8 bg-background p-8 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0"
+                className="flex flex-col border-b border-black/8 bg-background p-8 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0"
               >
                 <div className="mb-6 flex size-9 items-center justify-center rounded-lg bg-primary text-white">
-                  <Icon aria-hidden="true" className="size-5" />
+                  <ServiceIcon slug={slug} className="size-5" />
                 </div>
                 <h3 className="mb-2 font-heading text-[15px] font-medium text-foreground">
                   {label}
                 </h3>
                 <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
+                <Link
+                  href={`/services/${slug}`}
+                  className="mt-5 inline-flex items-center gap-2 self-start text-sm font-medium text-primary transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                >
+                  Learn more
+                  <ArrowRight aria-hidden="true" className="size-4" />
+                </Link>
               </article>
-            );
-          })}
+          ))}
         </div>
       </div>
     </section>
