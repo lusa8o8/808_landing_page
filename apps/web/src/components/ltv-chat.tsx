@@ -1,8 +1,10 @@
 "use client";
 
 import { ArrowRight, ArrowUp, Plus } from "lucide-react";
+import Link from "next/link";
 import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 
+import { siteConfig } from "@/content/site";
 import {
   isDuplicateResult,
   requestLtvEstimate,
@@ -19,7 +21,7 @@ function formatKwacha(value: number) {
 
 function ResultCard({ estimate }: { estimate: LtvEstimate }) {
   const whatsappText = `Hi 808 Digital Systems — I run a ${estimate.businessType} and my estimated annual client value is ${formatKwacha(estimate.total)}. I’d love to talk about capturing this.`;
-  const whatsappLink = `https://wa.me/260977000000?text=${encodeURIComponent(whatsappText)}`;
+  const whatsappLink = `${siteConfig.whatsappHref}?text=${encodeURIComponent(whatsappText)}`;
 
   return (
     <article className="space-y-4 rounded-xl border border-black/8 bg-white/95 p-4 text-left text-foreground shadow-lg">
@@ -53,13 +55,13 @@ function ResultCard({ estimate }: { estimate: LtvEstimate }) {
         </p>
       </div>
 
-      <a
-        href="#contact"
+      <Link
+        href="/#contact"
         className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:opacity-75"
       >
         Talk to us about capturing this {formatKwacha(estimate.total)} / yr
         <ArrowRight aria-hidden="true" className="size-4 shrink-0" />
-      </a>
+      </Link>
 
       <p className="text-center">
         <a

@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+
+import { siteConfig } from "@/content/site";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Landing Page for 808 Digital Systems",
-  description:
-    "Designed for Lusaka businesses, this app creates practical booking and discovery systems that enhance visibility and streamline client engagement.",
+  metadataBase: new URL(siteConfig.siteUrl),
+  title: {
+    default: "808 Digital Systems | Booking and discovery systems",
+    template: "%s | 808 Digital Systems",
+  },
+  description: siteConfig.description,
   robots: {
     index: false,
     follow: false,

@@ -1,7 +1,8 @@
 import Image from "next/image";
-import { ArrowRight, Calendar, List, MapPin, type LucideIcon } from "lucide-react";
+import { Calendar, List, MapPin, type LucideIcon } from "lucide-react";
 
 import { LtvChat } from "@/components/ltv-chat";
+import { audienceLabels, marketingServices, processSteps } from "@/content/marketing";
 
 const mosaic = [
   {
@@ -42,43 +43,11 @@ const mosaic = [
   },
 ] as const;
 
-const services: Array<{ icon: LucideIcon; label: string; description: string }> = [
-  {
-    icon: Calendar,
-    label: "Booking system",
-    description: "Clients book directly — no DMs, no missed calls, no double-bookings.",
-  },
-  {
-    icon: MapPin,
-    label: "Maps & discovery",
-    description: "Your business shows up when people search locally on Google and Maps.",
-  },
-  {
-    icon: List,
-    label: "Clear services & pricing",
-    description: "What you offer, what it costs, and how to book. All in one place.",
-  },
-];
-
-const audiences = ["Clinics", "Law firms", "Guesthouses", "Salons", "Schools", "Franchises"];
-
-const processSteps = [
-  {
-    number: "01",
-    heading: "We run the numbers with you",
-    body: "You tell us about your business. We calculate whether building a system makes financial sense before anything else.",
-  },
-  {
-    number: "02",
-    heading: "We build your system",
-    body: "A booking page, maps presence, and clear services listing — built for your specific business, not a template.",
-  },
-  {
-    number: "03",
-    heading: "You get bookable, findable, done",
-    body: "We hand it over fully operational. No mystery, no ongoing maintenance fees you didn’t agree to. You own it.",
-  },
-];
+const serviceIcons: Record<string, LucideIcon> = {
+  "booking-systems": Calendar,
+  "local-search-and-maps": MapPin,
+  "service-and-pricing-pages": List,
+};
 
 function SectionLabel({ children, accent = false }: { children: string; accent?: boolean }) {
   return (
@@ -92,7 +61,10 @@ function SectionLabel({ children, accent = false }: { children: string; accent?:
 
 function HeroSection() {
   return (
-    <section className="hero relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-24">
+    <section
+      id="calculator"
+      className="hero relative flex min-h-screen scroll-mt-16 flex-col items-center justify-center overflow-hidden px-4 py-24"
+    >
       <div
         className="absolute inset-0 grid grid-flow-dense grid-cols-4 grid-rows-3 gap-0.5"
         aria-hidden="true"
@@ -182,24 +154,30 @@ function ProblemSection() {
 
 function ServicesSection() {
   return (
-    <section className="bg-background px-4 py-24">
+    <section id="services" className="scroll-mt-16 bg-background px-4 py-24">
       <div className="mx-auto max-w-4xl">
         <div className="mb-12 text-center">
           <SectionLabel>What we build</SectionLabel>
         </div>
         <div className="grid overflow-hidden rounded-xl border border-black/8 sm:grid-cols-3">
-          {services.map(({ icon: Icon, label, description }) => (
-            <article
-              key={label}
-              className="border-b border-black/8 bg-background p-8 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0"
-            >
-              <div className="mb-6 flex size-9 items-center justify-center rounded-lg bg-primary text-white">
-                <Icon aria-hidden="true" className="size-5" />
-              </div>
-              <h3 className="mb-2 font-heading text-[15px] font-medium text-foreground">{label}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
-            </article>
-          ))}
+          {marketingServices.map(({ slug, label, description }) => {
+            const Icon = serviceIcons[slug];
+
+            return (
+              <article
+                key={slug}
+                className="border-b border-black/8 bg-background p-8 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0"
+              >
+                <div className="mb-6 flex size-9 items-center justify-center rounded-lg bg-primary text-white">
+                  <Icon aria-hidden="true" className="size-5" />
+                </div>
+                <h3 className="mb-2 font-heading text-[15px] font-medium text-foreground">
+                  {label}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -210,9 +188,11 @@ function ProofSection() {
   return (
     <section className="bg-background px-4 py-4">
       <div className="mx-auto max-w-2xl border-y border-black/8 py-16 text-center">
-        <p className="mb-3 font-heading text-6xl font-medium text-accent sm:text-7xl">1–5 clients</p>
+        <p className="mb-3 font-heading text-5xl font-medium text-accent sm:text-6xl">
+          Your numbers
+        </p>
         <p className="text-base text-muted-foreground">
-          is usually all it takes to cover the project cost
+          should show whether a new system makes commercial sense for your business
         </p>
       </div>
     </section>
@@ -227,7 +207,7 @@ function AudienceSection() {
           <SectionLabel>Who we work with</SectionLabel>
         </div>
         <ul className="flex list-none flex-wrap justify-center gap-3 p-0">
-          {audiences.map((audience) => (
+          {audienceLabels.map((audience) => (
             <li
               key={audience}
               className="rounded-full border border-primary/22 bg-primary/4 px-5 py-2 text-sm font-medium text-primary"
@@ -264,54 +244,6 @@ function ProcessSection() {
   );
 }
 
-function FooterCallToAction() {
-  return (
-    <footer id="contact" className="bg-primary px-4 py-24 text-center">
-      <div className="mx-auto max-w-lg space-y-8">
-        <h2 className="font-heading text-2xl font-medium leading-snug text-white sm:text-[32px]">
-          Ready to see if the math works for you?
-        </h2>
-
-        <a
-          href="https://wa.me/260977000000"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-lg bg-accent px-8 py-3.5 text-sm font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:opacity-75"
-        >
-          Book a call
-          <ArrowRight aria-hidden="true" className="size-4" />
-        </a>
-
-        <div className="space-y-3 border-t border-white/10 pt-8">
-          <p className="font-heading text-xs font-medium uppercase tracking-[0.2em] text-white/80">
-            808 Digital Systems
-          </p>
-          <p className="text-xs text-white/35">Lusaka, Zambia</p>
-          <div className="flex items-center justify-center gap-4 text-xs">
-            <a
-              href="mailto:hello@808digital.co.zm"
-              className="text-white/40 transition-colors hover:text-white/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            >
-              hello@808digital.co.zm
-            </a>
-            <span aria-hidden="true" className="text-white/20">
-              ·
-            </span>
-            <a
-              href="https://wa.me/260977000000"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/40 transition-colors hover:text-white/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            >
-              WhatsApp
-            </a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 export function LandingPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -322,7 +254,6 @@ export function LandingPage() {
       <ProofSection />
       <AudienceSection />
       <ProcessSection />
-      <FooterCallToAction />
     </main>
   );
 }
