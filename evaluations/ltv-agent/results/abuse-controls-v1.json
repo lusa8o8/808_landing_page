@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "agent": "808-ltv-agent",
+  "control_version": "abuse-controls-v1",
+  "created_at": "2026-08-18T12:06:54.141Z",
+  "deployment": "zrazabyjvjxpnuhwfoaf/ltv-agent",
+  "configuration": {
+    "client_burst_limit": 20,
+    "client_burst_window_seconds": 600,
+    "client_daily_limit": 60,
+    "global_daily_limit": 500,
+    "provider_timeout_ms": 12000,
+    "max_body_bytes": 32768,
+    "identifier_storage": "salted SHA-256 client-address hash",
+      "allowed_origins": [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "https://www.eightzeroeight.online"
+    ]
+  },
+  "checks": [
+    {
+      "name": "atomic-client-burst-limit",
+      "setup": "Temporarily set the burst limit to 2 for one isolated live check, then restored it to 20.",
+      "observed_statuses": [200, 200, 429],
+      "denial_scope": "client_burst",
+      "retry_after_present": true,
+      "passed": true
+    },
+    {
+      "name": "allowed-origin-preflight",
+      "origin": "http://localhost:3000",
+      "observed_status": 204,
+      "allow_origin_echoed": true,
+      "passed": true
+    },
+    {
+      "name": "disallowed-origin-preflight",
+      "origin": "https://embed.attacker",
+      "observed_status": 403,
+      "passed": true
+    },
+    {
+      "name": "oversized-body",
+      "request_bytes": 33027,
+      "observed_status": 413,
+      "provider_call_expected": false,
+      "passed": true
+    },
+    {
+      "name": "post-control-conversation-regression",
+      "raw_result": "history/conversation-state-v4/regression-2026-08-18T12-03-20.019Z.json",
+      "raw_pass_rate": 0.8571,
+      "regraded_result": "history/conversation-state-v4/regression-regraded-2026-08-18T12-03-54.260Z.json",
+      "regraded_pass_rate": 1,
+      "grader_correction": "The preserved example response used illustration, demonstration, and placeholders; deterministic-v4 recognizes these as explicit example-language synonyms.",
+      "model_calls_during_regrade": 0,
+      "passed": true
+    },
+    {
+      "name": "live-browser-calculation",
+      "input": "Salon, K250, monthly",
+      "result": "K3,000 with exactly one result card",
+      "browser_errors_or_warnings": 0,
+      "passed": true
+    },
+    {
+      "name": "production-dependency-audit",
+      "remediation": "Upgraded the legacy root from react-router 7.13.0 to 7.18.2.",
+      "known_vulnerabilities": 0,
+      "passed": true
+    },
+    {
+      "name": "repository-validation",
+      "unit_and_contract_tests": "11/11 passed",
+      "builds": ["public Next.js", "admin Next.js", "legacy Vite"],
+      "typecheck": "passed",
+      "lint": "passed",
+      "passed": true
+    }
+  ],
+  "result": "passed",
+  "residual_risks": [
+    "Rotating-address abuse can consume the global allowance.",
+    "Shared networks can share a client quota.",
+    "Additional deployment preview origins and the future 808digital.com domain must be explicitly allowlisted."
+  ]
+}

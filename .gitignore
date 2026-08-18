@@ -9,6 +9,14 @@ node_modules/
 # build output
 dist/
 build/
+.next/
+out/
+
+# tooling
+*.tsbuildinfo
+.turbo/
+.pnpm/
+supabase/.temp/
 
 # IDE files
 .vscode/

@@ -1,0 +1,60 @@
+{
+  "agent": "808-ltv-agent",
+  "selected_prompt_version": "conversation-state-v4",
+  "model": "openai/gpt-oss-120b",
+  "status": "approved-for-production",
+  "selected_at": "2026-08-18",
+  "regression_evidence": {
+    "result": "../results/history/conversation-state-v4/regression-2026-08-18T11-45-19.511Z.json",
+    "pass_rate": 1,
+    "critical_failures": 0,
+    "operational_failures": 0,
+    "p95_latency_ms": 2551,
+    "estimated_cost_usd": 0.001452
+  },
+  "development_evidence": {
+    "result": "../results/history/conversation-state-v4/development-2026-08-18T11-37-22.616Z.json",
+    "pass_rate": 1,
+    "critical_failures": 0,
+    "operational_failures": 0,
+    "p95_latency_ms": 1745,
+    "estimated_cost_usd": 0.005159
+  },
+  "fresh_heldout_evidence": {
+    "result": "../results/history/conversation-state-v4/heldout-v2-2026-08-18T11-39-38.323Z.json",
+    "pass_rate": 1,
+    "critical_failures": 0,
+    "operational_failures": 0,
+    "p95_latency_ms": 2034,
+    "estimated_cost_usd": 0.002542
+  },
+  "live_browser_evidence": {
+    "scenario": "Complete K50 monthly barbershop calculation followed by Nice",
+    "result_cards_before_acknowledgement": 1,
+    "result_cards_after_acknowledgement": 1,
+    "browser_errors_or_warnings": 0
+  },
+  "resilience": {
+    "structured_json_retry": "One bounded retry for Groq HTTP 400 json_validate_failed responses",
+    "duplicate_result_guard": "The client suppresses an identical result card even if a provider response incorrectly repeats it",
+    "public_error_copy": "Provider details remain in console diagnostics; users receive a short retry message"
+  },
+  "abuse_control_evidence": {
+    "result": "../results/abuse-controls-v1.json",
+    "status": "passed",
+    "client_burst": "20 requests per 10 minutes",
+    "client_daily": 60,
+    "global_daily": 500,
+    "data_minimization": "Only a salted SHA-256 client-address hash is stored; application code stores no conversation text.",
+    "failure_mode": "Quota dependency failures return 503 without calling Groq."
+  },
+  "deployment": "Deployed to Supabase project zrazabyjvjxpnuhwfoaf with JWT verification disabled for the public landing-page calculator.",
+  "canonical_production_origin": "https://www.eightzeroeight.online",
+  "future_origin": "808digital.com is not yet purchased or allowlisted.",
+  "owner_approval": {
+    "name": "Lusa Malungisha",
+    "date": "2026-08-18",
+    "decision": "approve for production traffic"
+  },
+  "remaining_gate": "None for the bounded LTV agent release. Site-wide Phase 4 and deployment Phase 8 gates remain separate."
+}

@@ -1,0 +1,129 @@
+{
+  "schema_version": "1.0",
+  "agent_id": "digital-808-ltv-agent",
+  "version": "conversation-state-v4-abuse-controls-v1",
+  "objective": "Estimate annual client value conversationally while bounding anonymous provider usage and cost.",
+  "risk_level": "medium",
+  "architecture": {
+    "type": "single_call",
+    "rationale": "One bounded language-model call handles conversational extraction; deterministic code owns validation, quotas, arithmetic, and failures.",
+    "simpler_options_rejected": [
+      "Deterministic parsing alone is insufficient for varied natural-language business descriptions and frequencies."
+    ]
+  },
+  "interfaces": ["web", "api", "batch"],
+  "capabilities": [
+    {
+      "id": "conversational-extraction",
+      "kind": "prompt",
+      "initiator": "application",
+      "access": "advisory",
+      "side_effect": false,
+      "consequence": "none",
+      "approval": "none",
+      "verification": "Versioned development, regression, held-out, and human review evidence.",
+      "owner_skill": "python-agents-toolkit:engineer-and-evaluate-prompts",
+      "rationale": "The task requires bounded natural-language interpretation."
+    },
+    {
+      "id": "contract-and-budget-workflow",
+      "kind": "workflow",
+      "initiator": "application",
+      "access": "execute",
+      "side_effect": false,
+      "consequence": "none",
+      "approval": "none",
+      "verification": "Unit tests, deployment smoke tests, and response telemetry.",
+      "owner_skill": "python-agents-toolkit:design-and-evaluate-ai-agents",
+      "rationale": "Deterministic host controls must precede and validate the model call."
+    },
+    {
+      "id": "anonymous-quota-counters",
+      "kind": "storage",
+      "initiator": "application",
+      "access": "write",
+      "side_effect": true,
+      "consequence": "internal",
+      "approval": "none",
+      "verification": "Atomic database RPC results, expiry checks, and 429 smoke tests.",
+      "owner_skill": "python-agents-toolkit:design-and-evaluate-ai-agents",
+      "rationale": "A durable cross-isolate quota is required to protect model spend."
+    }
+  ],
+  "data": {
+    "tenant_scoped": false,
+    "sensitive": true,
+    "sources": [
+      "Anonymous visitor messages",
+      "HTTP request metadata",
+      "Supabase quota state",
+      "Groq structured responses"
+    ],
+    "retention": "Application code stores no messages. Salted client hashes and counters expire after 48 hours and are opportunistically deleted.",
+    "trust_boundaries": [
+      "Browser or evaluator to Supabase Edge Function",
+      "Edge Function to Supabase Postgres Data API",
+      "Edge Function to Groq"
+    ]
+  },
+  "budgets": {
+    "max_model_calls": 2,
+    "max_tool_rounds": 0,
+    "timeout_seconds": 12,
+    "max_input_tokens": 8000,
+    "max_output_tokens": 400,
+    "cost_limit_usd": 0.002
+  },
+  "policies": {
+    "clarification": "Ask one focused question when a required calculation input is missing or ambiguous.",
+    "abstention": "Redirect unsupported tasks and refuse prompt, model, credential, or secret disclosure.",
+    "approval": "No consequential capability exists; quota-counter writes are internal and automatic.",
+    "environment_inspection": "Check required server configuration before quota and provider calls.",
+    "postcondition_verification": "Validate the structured response and calculate totals in server code before returning it."
+  },
+  "evaluation": {
+    "development_dataset": "evaluations/ltv-agent/datasets/development-v1.json",
+    "held_out_dataset": "evaluations/ltv-agent/datasets/heldout-v2.json",
+    "metrics": [
+      "deterministic pass rate",
+      "critical and operational failures",
+      "P95 latency",
+      "provider calls and retries",
+      "token usage and estimated cost",
+      "quota denials and dependency failures"
+    ],
+    "critical_failures": [
+      "Secret or system-prompt disclosure",
+      "Fabricated or arithmetically invalid calculation",
+      "Provider call after quota denial",
+      "Raw client address persisted or logged",
+      "Quota dependency failure that fails open"
+    ],
+    "held_out_required": true,
+    "html_report": true
+  },
+  "excluded_capabilities": [
+    {
+      "capability": "Cloudflare Turnstile",
+      "reason": "No observed rotating-address abuse yet; it adds a challenge and another vendor.",
+      "evidence_to_add": "Sustained rotating-address abuse or unacceptable exhaustion of the global allowance."
+    },
+    {
+      "capability": "Authentication and durable conversations",
+      "reason": "The landing-page calculator is intentionally anonymous and does not need saved state.",
+      "evidence_to_add": "A reviewed requirement for saved estimates with retention, deletion, and tenant-isolation policies."
+    },
+    {
+      "capability": "Tools, RAG, browsing, files, or subagents",
+      "reason": "The supported calculator task does not require them.",
+      "evidence_to_add": "A new product requirement and boundary-specific evaluation suite."
+    }
+  ],
+  "residual_risks": [
+    "Distributed callers can rotate network addresses until the global ceiling is reached.",
+    "Shared networks can cause legitimate visitors to share a quota.",
+    "Forwarded-address integrity depends on the hosted Supabase edge gateway.",
+    "Provider and platform logs have retention outside application-controlled storage.",
+    "The future 808digital.com origin requires an explicit configuration change after domain purchase and deployment."
+  ]
+}

@@ -1,11 +1,28 @@
 {
-  "name": "@figma/my-make-file",
+  "name": "@808/legacy-web",
   "private": true,
   "version": "0.0.1",
   "type": "module",
+  "packageManager": "pnpm@10.12.4",
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
-    "build": "vite build",
-    "dev": "vite"
+    "build": "pnpm run build:web && pnpm run build:admin && pnpm run build:legacy",
+    "build:web": "pnpm --filter @808/web build",
+    "build:admin": "pnpm --filter @808/admin build",
+    "build:legacy": "vite build",
+    "dev": "pnpm run dev:web",
+    "dev:web": "pnpm --filter @808/web dev",
+    "dev:admin": "pnpm --filter @808/admin dev",
+    "dev:legacy": "vite",
+    "eval:ltv": "node scripts/evaluate-ltv-agent.mjs",
+    "eval:ltv:report": "node scripts/render-ltv-eval.mjs",
+    "eval:ltv:compare": "node scripts/compare-ltv-evals.mjs",
+    "design:ltv:report": "node scripts/render-agent-design.mjs docs/architecture/ltv-agent/agent-design.md docs/architecture/ltv-agent/agent-manifest.json docs/architecture/ltv-agent/agent-design.html",
+    "lint": "pnpm --filter @808/web lint && pnpm --filter @808/admin lint",
+    "typecheck": "pnpm --filter @808/web typecheck && pnpm --filter @808/admin typecheck",
+    "test": "pnpm --filter @808/web test && pnpm --filter @808/admin test"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
@@ -49,14 +66,16 @@
     "lucide-react": "0.487.0",
     "motion": "12.23.24",
     "next-themes": "0.4.6",
+    "react": "18.3.1",
     "react-day-picker": "8.10.1",
     "react-dnd": "16.0.1",
     "react-dnd-html5-backend": "16.0.1",
+    "react-dom": "18.3.1",
     "react-hook-form": "7.55.0",
     "react-popper": "2.3.0",
     "react-resizable-panels": "2.1.7",
     "react-responsive-masonry": "2.7.1",
-    "react-router": "7.13.0",
+    "react-router": "7.18.2",
     "react-slick": "0.31.0",
     "recharts": "2.15.2",
     "sonner": "2.0.3",
@@ -70,18 +89,6 @@
     "supabase": "^2.109.1",
     "tailwindcss": "4.1.12",
     "vite": "6.3.5"
-  },
-  "peerDependencies": {
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
-  },
-  "peerDependenciesMeta": {
-    "react": {
-      "optional": true
-    },
-    "react-dom": {
-      "optional": true
-    }
   },
   "pnpm": {
     "overrides": {

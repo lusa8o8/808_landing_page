@@ -1,10 +1,11 @@
 packages:
   - '.'
-supportedArchitectures:
-  os:
-    - linux
-  cpu:
-    - x64
-    - arm64
-  libc:
-    - glibc
+  - 'apps/*'
+virtualStoreDir: '.pnpm'
+virtualStoreDirMaxLength: 40
+packageImportMethod: 'hardlink'
+nodeLinker: 'hoisted'
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - 'esbuild'
+  - 'unrs-resolver'

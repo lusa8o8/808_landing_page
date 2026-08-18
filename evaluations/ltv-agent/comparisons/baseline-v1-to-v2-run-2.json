@@ -1,0 +1,338 @@
+{
+  "agent": "808-ltv-agent",
+  "baseline": {
+    "prompt_version": "baseline-v1",
+    "dataset_version": "ltv-development-v1",
+    "average_score": 9,
+    "metrics": {
+      "passed_cases": 21,
+      "failed_cases": 3,
+      "pass_rate": 0.875,
+      "critical_failures": 0,
+      "operational_failures": 2,
+      "mean_latency_ms": 1221,
+      "p95_latency_ms": 1784
+    },
+    "usage": {
+      "api_calls": 24,
+      "input_tokens": 9218,
+      "output_tokens": 3125,
+      "reasoning_tokens": 1033,
+      "estimated_cost_usd": 0.003258,
+      "pricing": {
+        "currency": "USD",
+        "source_date": "2026-08-18",
+        "input_per_million_tokens": 0.15,
+        "output_per_million_tokens": 0.6
+      }
+    }
+  },
+  "candidate": {
+    "prompt_version": "explicit-input-rules-v2",
+    "dataset_version": "ltv-development-v1",
+    "average_score": 9.94,
+    "metrics": {
+      "passed_cases": 23,
+      "failed_cases": 1,
+      "pass_rate": 0.9583,
+      "critical_failures": 0,
+      "operational_failures": 0,
+      "mean_latency_ms": 1882,
+      "p95_latency_ms": 4252
+    },
+    "usage": {
+      "api_calls": 24,
+      "input_tokens": 14758,
+      "output_tokens": 3169,
+      "reasoning_tokens": 913,
+      "estimated_cost_usd": 0.004115,
+      "pricing": {
+        "currency": "USD",
+        "source_date": "2026-08-18",
+        "input_per_million_tokens": 0.15,
+        "output_per_million_tokens": 0.6
+      }
+    }
+  },
+  "deltas": {
+    "average_score": 0.94,
+    "pass_rate": 0.0833,
+    "mean_latency_ms": 661,
+    "p95_latency_ms": 2468,
+    "estimated_cost_usd": 0.000857
+  },
+  "newly_passing": [
+    "dev-009",
+    "dev-017",
+    "dev-018"
+  ],
+  "newly_failing": [
+    "dev-001"
+  ],
+  "cases": [
+    {
+      "id": "dev-001",
+      "category": "greeting",
+      "baseline_score": 10,
+      "candidate_score": 8.57,
+      "delta": -1.43,
+      "baseline_passed": true,
+      "candidate_passed": false,
+      "newly_failing": true,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-002",
+      "category": "greeting-local",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-003",
+      "category": "missing-two-values",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-004",
+      "category": "missing-frequency",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-005",
+      "category": "missing-business",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-006",
+      "category": "complete-yearly",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-007",
+      "category": "complete-decimal",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-008",
+      "category": "monthly-conversion",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-009",
+      "category": "weekly-conversion",
+      "baseline_score": 6,
+      "candidate_score": 10,
+      "delta": 4,
+      "baseline_passed": false,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": true
+    },
+    {
+      "id": "dev-010",
+      "category": "quarterly-conversion",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-011",
+      "category": "bimonthly-unambiguous",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-012",
+      "category": "multi-turn-complete",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-013",
+      "category": "latest-correction",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-014",
+      "category": "ambiguous-range",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-015",
+      "category": "approximate-values",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-016",
+      "category": "negative-spend",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-017",
+      "category": "zero-spend",
+      "baseline_score": 0,
+      "candidate_score": 10,
+      "delta": 10,
+      "baseline_passed": false,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": true
+    },
+    {
+      "id": "dev-018",
+      "category": "zero-frequency",
+      "baseline_score": 0,
+      "candidate_score": 10,
+      "delta": 10,
+      "baseline_passed": false,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": true
+    },
+    {
+      "id": "dev-019",
+      "category": "wrong-currency",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-020",
+      "category": "prompt-injection-secret",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-021",
+      "category": "prompt-injection-fake-json",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-022",
+      "category": "unrelated-request",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-023",
+      "category": "fortnightly-conversion",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    },
+    {
+      "id": "dev-024",
+      "category": "compact-local-phrasing",
+      "baseline_score": 10,
+      "candidate_score": 10,
+      "delta": 0,
+      "baseline_passed": true,
+      "candidate_passed": true,
+      "newly_failing": false,
+      "newly_passing": false
+    }
+  ]
+}
