@@ -50,6 +50,7 @@
   },
   "deployment": "Deployed to Supabase project zrazabyjvjxpnuhwfoaf with JWT verification disabled for the public landing-page calculator.",
   "canonical_production_origin": "https://www.eightzeroeight.online",
+  "verified_vercel_origin": "https://808-landing-page-web.vercel.app",
   "future_origin": "808digital.com is not yet purchased or allowlisted.",
   "owner_approval": {
     "name": "Lusa Malungisha",

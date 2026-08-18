@@ -13,6 +13,7 @@
 - The deployed prompt is versioned as `conversation-state-v4`. Result-card state is represented in sanitized conversation history so acknowledgements and corrections behave predictably.
 - The endpoint is intentionally anonymous and has `verify_jwt = false`. Durable, atomic quotas are therefore required before any provider call.
 - The confirmed canonical production origin is `https://www.eightzeroeight.online`. The future `808digital.com` domain is not purchased or allowlisted.
+- The public Vercel deployment origin is `https://808-landing-page-web.vercel.app`; it is explicitly allowlisted for deployment smoke testing. The separate admin deployment is not allowed to call the public calculator.
 
 ## Drift from the original plan
 
@@ -55,5 +56,6 @@
 - A production-browser replay completed a salon estimate, rendered one correct result card, and produced no browser errors or warnings.
 - The production dependency audit reports no known vulnerabilities, and web, admin, and legacy builds pass.
 - Site owner Lusa Malungisha approved the bounded LTV agent for production traffic on 2026-08-18.
+- Post-import deployment smoke testing returned HTTP 200 from the separate public and admin Vercel projects. The public origin passed the deployed function's CORS preflight with HTTP 204 and an exact `Access-Control-Allow-Origin`; the admin origin was not added to the allowlist.
 - Prompt/model rollback is available through the preserved versioned prompt and selection evidence. The database migration is additive.
 - The phase is technically complete, but its repository rollback point has not been created because the full migration worktree remains uncommitted.
