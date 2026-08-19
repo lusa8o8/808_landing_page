@@ -245,8 +245,7 @@ function LTVChat({ msgs, setMsgs }: LTVChatProps) {
 
       <form onSubmit={submit} className="w-full pt-2">
         <div
-          className="flex items-center gap-3 border-b-2 pb-2.5 transition-colors focus-within:border-white/80"
-          style={{ borderColor: P }}
+          className="flex items-center gap-3 border-b-2 pb-2.5 transition-colors border-white/70 focus-within:border-white"
         >
           <button
             type="button"

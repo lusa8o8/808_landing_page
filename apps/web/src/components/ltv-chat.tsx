@@ -202,7 +202,7 @@ export function LtvChat() {
       </div>
 
       <form onSubmit={submit} className="w-full pt-2">
-        <div className="flex items-center gap-3 border-b-2 border-primary pb-2.5 transition-colors focus-within:border-white/80">
+        <div className="flex items-center gap-3 border-b-2 border-white/70 pb-2.5 transition-colors focus-within:border-white">
           <button
             type="button"
             disabled
