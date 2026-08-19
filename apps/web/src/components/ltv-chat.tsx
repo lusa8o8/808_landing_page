@@ -201,37 +201,39 @@ export function LtvChat() {
         ) : null}
       </div>
 
-      <form
-        onSubmit={submit}
-        className="flex flex-col gap-2 rounded-3xl border border-black/8 bg-white p-3 shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
-      >
-        <label htmlFor="ltv-prompt" className="sr-only">
-          Describe your business, typical customer spend, and repeat visits
-        </label>
-        <textarea
-          id="ltv-prompt"
-          value={input}
-          onChange={(event) => setInput(event.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="e.g. I run a dental clinic, patients pay K350 a visit..."
-          rows={2}
-          className="min-h-[60px] w-full resize-none bg-transparent p-1 text-sm text-foreground outline-none placeholder:text-muted-foreground/60 focus-visible:ring-2 focus-visible:ring-primary/40"
-        />
-        <div className="flex items-center justify-between">
+      <form onSubmit={submit} className="w-full pt-2">
+        <div className="flex items-center gap-3 border-b-2 border-primary pb-2.5 transition-colors focus-within:border-white/80">
           <button
             type="button"
             disabled
             aria-label="Attachments are not available"
             title="Attachments are not available"
-            className="rounded-full border border-gray-100 p-1 text-gray-400 disabled:cursor-not-allowed disabled:opacity-60"
+            className="p-1 text-white/50 hover:text-white transition-colors disabled:cursor-not-allowed disabled:opacity-40"
           >
             <Plus aria-hidden="true" className="size-5" strokeWidth={1.5} />
           </button>
+          <label htmlFor="ltv-prompt" className="sr-only">
+            Describe your business, typical customer spend, and repeat visits
+          </label>
+          <input
+            id="ltv-prompt"
+            type="text"
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                submit(e as any);
+              }
+            }}
+            placeholder="e.g. I run a dental clinic, patients pay K350 a visit..."
+            className="w-full bg-transparent outline-none text-white text-sm sm:text-base placeholder:text-white/40 py-1"
+          />
           <button
             type="submit"
             disabled={!input.trim() || loading}
             aria-label="Calculate annual client value"
-            className="flex size-8 items-center justify-center rounded-full bg-primary text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-40"
+            className="flex size-8 items-center justify-center rounded-full bg-primary text-white transition-all hover:scale-105 active:scale-95 shrink-0 disabled:cursor-not-allowed disabled:opacity-30"
           >
             <ArrowUp aria-hidden="true" className="size-4" strokeWidth={2} />
           </button>
