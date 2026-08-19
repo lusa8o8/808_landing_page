@@ -257,7 +257,7 @@ function LTVChat({ msgs, setMsgs }: LTVChatProps) {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="e.g. I run a dental clinic, patients pay K350 a visit..."
+            placeholder={msgs.length > 0 ? "Type your response..." : "e.g. I run a dental clinic, patients pay K350 a visit..."}
             className="w-full bg-transparent outline-none text-white text-sm sm:text-base placeholder:text-white/40 py-1"
             onKeyDown={(e) => {
               if (e.key === 'Enter') {

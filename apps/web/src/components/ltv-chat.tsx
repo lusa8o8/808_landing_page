@@ -226,7 +226,7 @@ export function LtvChat() {
                 submit(e as any);
               }
             }}
-            placeholder="e.g. I run a dental clinic, patients pay K350 a visit..."
+            placeholder={messages.length > 0 ? "Type your response..." : "e.g. I run a dental clinic, patients pay K350 a visit..."}
             className="w-full bg-transparent outline-none text-white text-sm sm:text-base placeholder:text-white/40 py-1"
           />
           <button
