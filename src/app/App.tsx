@@ -243,27 +243,34 @@ function LTVChat({ msgs, setMsgs }: LTVChatProps) {
         )}
       </div>
 
-      <form onSubmit={submit} className="flex flex-col bg-white rounded-3xl p-3 shadow-[0_2px_8px_rgba(0,0,0,0.04)] border gap-2" style={{ borderColor: "rgba(0,0,0,0.08)" }}>
-        <textarea
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="e.g. I run a dental clinic, patients pay K350 a visit..."
-          className="w-full resize-none bg-transparent outline-none text-sm placeholder:text-muted-foreground/60 p-1 min-h-[60px]"
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              submit(e as any);
-            }
-          }}
-        />
-        <div className="flex justify-between items-center">
-          <button type="button" className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors border border-gray-100">
+      <form onSubmit={submit} className="w-full pt-2">
+        <div
+          className="flex items-center gap-3 border-b-2 pb-2.5 transition-colors focus-within:border-white/80"
+          style={{ borderColor: P }}
+        >
+          <button
+            type="button"
+            className="p-1 text-white/50 hover:text-white transition-colors"
+          >
             <Plus className="w-5 h-5" strokeWidth={1.5} />
           </button>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="e.g. I run a dental clinic, patients pay K350 a visit..."
+            className="w-full bg-transparent outline-none text-white text-sm sm:text-base placeholder:text-white/40 py-1"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                submit(e as any);
+              }
+            }}
+          />
           <button
             type="submit"
             disabled={!input.trim() || loading}
-            className="flex items-center justify-center w-8 h-8 rounded-full text-white disabled:opacity-40 transition-opacity hover:opacity-90"
+            className="flex items-center justify-center w-8 h-8 rounded-full text-white disabled:opacity-30 transition-all hover:scale-105 active:scale-95 flex-shrink-0"
             style={{ background: P }}
           >
             <ArrowUp className="w-4 h-4" strokeWidth={2} />
