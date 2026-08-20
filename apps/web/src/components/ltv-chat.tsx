@@ -50,14 +50,14 @@ function ResultCard({ estimate }: { estimate: LtvEstimate }) {
 
       <div className="border-t border-black/8 pt-3 text-center">
         <p className="mb-1 text-[11px] text-muted-foreground">Annual client value</p>
-        <p className="font-heading text-3xl font-medium text-accent">
+        <p className="font-heading text-3xl font-medium text-accent-strong">
           {formatKwacha(estimate.total)}
         </p>
       </div>
 
       <Link
         href="/#contact"
-        className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:opacity-75"
+        className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-primary transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:opacity-75"
       >
         Talk to us about capturing this {formatKwacha(estimate.total)} / yr
         <ArrowRight aria-hidden="true" className="size-4 shrink-0" />

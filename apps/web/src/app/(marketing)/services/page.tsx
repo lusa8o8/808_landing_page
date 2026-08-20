@@ -42,7 +42,7 @@ export default function ServicesPage() {
                 </p>
                 <Link
                   href={`/services/${service.slug}`}
-                  className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                  className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-accent-strong focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
                 >
                   Explore this service
                   <ArrowRight aria-hidden="true" className="size-4" />
@@ -61,7 +61,7 @@ export default function ServicesPage() {
             </p>
             <Link
               href="/calculator"
-              className="mt-7 inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="mt-7 inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-medium text-primary transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               Calculate annual client value
               <ArrowRight aria-hidden="true" className="size-4" />

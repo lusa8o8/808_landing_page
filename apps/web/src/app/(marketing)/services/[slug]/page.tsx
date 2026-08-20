@@ -51,7 +51,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <div className="mx-auto max-w-5xl">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+            className="inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-accent-strong focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
           >
             <ArrowLeft aria-hidden="true" className="size-4" />
             All services
@@ -68,7 +68,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
           <div className="mt-16 grid gap-12 lg:grid-cols-2 lg:gap-16">
             <section aria-labelledby="outcomes-heading">
-              <p className="font-heading text-xs font-medium uppercase tracking-[0.18em] text-accent">
+              <p className="font-heading text-xs font-medium uppercase tracking-[0.18em] text-accent-strong">
                 Customer outcomes
               </p>
               <h2 id="outcomes-heading" className="mt-3 font-heading text-3xl font-medium">
@@ -77,7 +77,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <ul className="mt-7 space-y-4">
                 {service.outcomes.map((outcome) => (
                   <li key={outcome} className="flex gap-3 text-sm leading-relaxed text-foreground">
-                    <Check aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-accent" />
+                    <Check aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-accent-strong" />
                     {outcome}
                   </li>
                 ))}
@@ -85,7 +85,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             </section>
 
             <section aria-labelledby="scope-heading">
-              <p className="font-heading text-xs font-medium uppercase tracking-[0.18em] text-accent">
+              <p className="font-heading text-xs font-medium uppercase tracking-[0.18em] text-accent-strong">
                 Typical scope
               </p>
               <h2 id="scope-heading" className="mt-3 font-heading text-3xl font-medium">
@@ -156,7 +156,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <div className="mt-12 text-center">
             <Link
               href="/calculator"
-              className="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              className="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-medium text-primary transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               Run your numbers
               <ArrowRight aria-hidden="true" className="size-4" />

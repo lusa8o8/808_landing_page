@@ -104,7 +104,7 @@ function CustomerPathSection() {
               key={step.number}
               className="border-b border-black/8 p-7 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0"
             >
-              <p className="mb-8 font-heading text-xs font-medium tracking-[0.16em] text-accent">
+              <p className="mb-8 font-heading text-xs font-medium tracking-[0.16em] text-accent-strong">
                 {step.number}
               </p>
               <h3 className="mb-3 font-heading text-lg font-medium text-foreground">
@@ -177,7 +177,7 @@ function ServicesSection() {
                 className={`mt-5 inline-flex items-center gap-2 self-start text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 ${
                   index === 0
                     ? "text-white hover:text-white/75 focus-visible:outline-white"
-                    : "text-primary hover:text-accent focus-visible:outline-primary"
+                    : "text-primary hover:text-accent-strong focus-visible:outline-primary"
                 }`}
               >
                 Learn more

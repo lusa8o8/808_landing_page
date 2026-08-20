@@ -40,9 +40,9 @@ const demoBusiness = {
   location: "Illustrative Lusaka salon",
   provider: "Maya",
   theme: {
-    "--snap-accent": "#1f4e5f",
-    "--snap-signal": "#d9622b",
-    "--snap-surface": "#faf7f2",
+    "--snap-accent": "#26372d",
+    "--snap-signal": "#dca548",
+    "--snap-surface": "#f4efe3",
   } as DemoStyle,
   services: [
     {
@@ -110,7 +110,7 @@ function PrimaryButton({ children, onClick }: { children: React.ReactNode; onCli
     <button
       type="button"
       onClick={onClick}
-      className="flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--snap-signal)] px-5 py-3.5 text-sm font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--snap-signal)] active:opacity-75"
+      className="flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--snap-signal)] px-5 py-3.5 text-sm font-medium text-[var(--snap-accent)] transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--snap-accent)] active:opacity-75"
     >
       {children}
     </button>
@@ -163,15 +163,15 @@ export function SnapbookDemo() {
           </p>
           <ul className="space-y-4 text-sm text-foreground/75">
             <li className="flex gap-3">
-              <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent" />
+              <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-strong" />
               One clear service and time-selection path
             </li>
             <li className="flex gap-3">
-              <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent" />
+              <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-strong" />
               A reusable return experience for repeat customers
             </li>
             <li className="flex gap-3">
-              <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent" />
+              <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-strong" />
               Client branding without redesigning the workflow
             </li>
           </ul>
@@ -179,7 +179,7 @@ export function SnapbookDemo() {
 
         <article
           aria-label="Interactive SnapBook booking demonstration"
-          className="mx-auto w-full max-w-[420px] overflow-hidden rounded-[28px] border border-black/10 bg-white shadow-[0_24px_70px_rgba(31,78,95,0.16)]"
+          className="mx-auto w-full max-w-[420px] overflow-hidden rounded-[28px] border border-black/10 bg-white shadow-[0_24px_70px_rgba(38,55,45,0.16)]"
           style={demoBusiness.theme}
         >
           <header className="flex items-center justify-between border-b border-black/7 bg-[var(--snap-surface)] px-5 py-4">
@@ -387,7 +387,7 @@ export function SnapbookDemo() {
                   <button
                     type="button"
                     onClick={bookUsual}
-                    className="mt-5 w-full rounded-xl bg-[var(--snap-signal)] px-4 py-3 text-sm font-medium text-white hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                    className="mt-5 w-full rounded-xl bg-[var(--snap-signal)] px-4 py-3 text-sm font-medium text-[var(--snap-accent)] hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
                     Preview book again
                   </button>
