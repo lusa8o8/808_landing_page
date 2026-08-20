@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { LtvChat } from "@/components/ltv-chat";
 import { ServiceIcon } from "@/components/service-icon";
+import { SnapbookDemo } from "@/components/snapbook-demo";
 import { marketingServices, processSteps } from "@/content/marketing";
 
 const customerPath = [
@@ -242,6 +243,7 @@ export function LandingPage() {
       <HeroSection />
       <CustomerPathSection />
       <ServicesSection />
+      <SnapbookDemo />
       <GroundingSection />
       <ProcessSection />
     </main>

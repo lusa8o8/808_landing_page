@@ -63,3 +63,14 @@ The demo configuration will model the future tenant-controlled surface—busines
 - The LTV calculator remains the only hero interaction.
 - No backend or operational booking capability is implied.
 - Verification evidence and remaining visual/copy debt are recorded before the implementation commit.
+
+## Implementation handoff
+
+- Added one isolated React client component below the core offer and before the local grounding band.
+- Preserved six fixture-backed states: service selection, time selection, review, demo confirmation, returning-customer view, and rescheduling.
+- Added a configuration boundary for the illustrative business identity, theme tokens, services, provider, times, prices, and appointment fixtures.
+- Removed all contact inputs, browser storage, network access, ratings, scarcity, reminder, calendar, recurrence, and real-booking claims from the prototype path.
+- Added native button interactions, accessible selected states, keyboard focus treatments, a polite reschedule status, reset behavior, and explicit demo/no-booking language.
+- Verification passed: 14 web/agent tests, web lint, web type-check, production web build, and a live local rendered-content check. `/` remains statically prerendered; the SnapBook interaction is the intentional client island.
+- The live rendered page contains the product-preview heading and contains no telephone input, `sb_guest` storage key, or Unsplash dependency. Source inspection found no storage, network, scarcity, rating, reminder-delivery, or calendar-action implementation.
+- Desktop/mobile interaction and visual acceptance remain the final gate before this commit is pushed to `origin/main` and allowed to deploy.
