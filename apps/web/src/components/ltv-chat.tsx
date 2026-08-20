@@ -131,7 +131,7 @@ export function LtvChat() {
     }
   }
 
-  function handleKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
+  function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       event.currentTarget.form?.requestSubmit();
@@ -220,12 +220,7 @@ export function LtvChat() {
             type="text"
             value={input}
             onChange={(event) => setInput(event.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                submit(e as any);
-              }
-            }}
+            onKeyDown={handleKeyDown}
             placeholder={messages.length > 0 ? "Type your response..." : "e.g. I run a dental clinic, patients pay K350 a visit..."}
             className="w-full bg-transparent outline-none text-white text-sm sm:text-base placeholder:text-white/40 py-1"
           />

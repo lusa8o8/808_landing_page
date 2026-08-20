@@ -91,8 +91,9 @@ export const marketingServices = defineMarketingServices([
   },
   {
     slug: "service-and-pricing-pages",
-    label: "Service and pricing pages",
-    description: "Present what you offer, what it costs, and the next step in one clear place.",
+    label: "Landing and service pages",
+    description:
+      "Give customers one clear place to understand your business, your services, and what to do next.",
     intro:
       "Turn a scattered list of offers into a clear customer-facing service catalogue, with pricing or quotation language that fits how your business sells.",
     bestFor:

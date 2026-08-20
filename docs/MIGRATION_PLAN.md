@@ -168,6 +168,21 @@ Packages are introduced only when at least two consumers or a clear security/typ
 
 ## Phase 3: Public routing, content model, and SEO foundation
 
+### 2026-08-20 scope amendment
+
+Phase 3 now includes a landing-page narrative and conversion pass before any public product-demo work. The migrated home page achieved framework and visual parity, but parity preserved a weak sequence: the working calculator was followed by disconnected positioning, problem, service, proof, audience, and process sections. The next release must form one continuous path from calculated client value to customer-journey friction, the core landing-page offer, supporting discovery/booking systems, the engagement process, and direct contact.
+
+This amendment also supersedes the earlier recommendation to implement industry routes next. Industry pages, case studies, and broad audience claims remain content-gated until real client insight or approved evidence makes them useful. They are not required for the current direct-outreach acquisition model.
+
+Implementation order within the remainder of Phase 3:
+
+1. Refactor the home-page hierarchy and copy without adding invented proof, calculator warnings, or unapproved commercial promises.
+2. Verify the revised page as a complete desktop and mobile scroll journey.
+3. Convert the SnapBook HTML prototype into a safe fixture-backed demo component and place it below the core offer, not inside the calculator hero.
+4. Finalize the remaining approved route and SEO work only when its content and operating decisions are ready.
+
+The proposed free-year booking offer is intentionally excluded from public copy in the first step. Its duration, eligibility, included capability, support boundary, transition terms, and availability must be approved as one coherent public promise before it appears on the site.
+
 ### Discovery focus
 
 - Reassess business priorities, available copy, search intent, and route ownership.

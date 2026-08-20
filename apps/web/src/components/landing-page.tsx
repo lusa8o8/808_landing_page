@@ -1,55 +1,47 @@
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 import { LtvChat } from "@/components/ltv-chat";
 import { ServiceIcon } from "@/components/service-icon";
-import { audienceLabels, marketingServices, processSteps } from "@/content/marketing";
+import { marketingServices, processSteps } from "@/content/marketing";
 
-const mosaic = [
+const customerPath = [
   {
-    id: "1616391182219-e080b4d1043a",
-    alt: "Dental clinic treatment chair interior",
-    columns: 2,
-    rows: 2,
+    number: "01",
+    heading: "Be found",
+    body: "Give nearby customers accurate information when they search for what you do.",
   },
   {
-    id: "1719749938395-0fa460e8d3f7",
-    alt: "Boutique guesthouse bedroom with four-poster bed",
-    columns: 1,
-    rows: 1,
+    number: "02",
+    heading: "Be understood",
+    body: "Make your services, pricing approach, location, and next step easy to understand.",
   },
   {
-    id: "1521590832167-7bcbfaa6381f",
-    alt: "Hair salon interior",
-    columns: 1,
-    rows: 2,
-  },
-  {
-    id: "1632215861513-130b66fe97f4",
-    alt: "School teacher with students in Africa",
-    columns: 1,
-    rows: 1,
-  },
-  {
-    id: "1767938072127-d66be4b9d74d",
-    alt: "Small business storefront at sunset",
-    columns: 2,
-    rows: 1,
-  },
-  {
-    id: "1499750310107-5fef28a66643",
-    alt: "Professional law firm office workspace",
-    columns: 2,
-    rows: 1,
+    number: "03",
+    heading: "Be contacted or booked",
+    body: "Give an interested customer one clear path to act without chasing scattered details.",
   },
 ] as const;
 
-function SectionLabel({ children, accent = false }: { children: string; accent?: boolean }) {
+const homepageServiceOrder = [
+  "service-and-pricing-pages",
+  "booking-systems",
+  "local-search-and-maps",
+] as const;
+
+const homepageServices = homepageServiceOrder.map((slug) => {
+  const service = marketingServices.find((candidate) => candidate.slug === slug);
+
+  if (!service) {
+    throw new Error(`Missing homepage service: ${slug}`);
+  }
+
+  return service;
+});
+
+function SectionLabel({ children }: { children: string }) {
   return (
-    <p
-      className={`text-[10px] font-medium uppercase tracking-[0.2em] ${accent ? "text-accent" : "text-primary"}`}
-    >
+    <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-primary">
       {children}
     </p>
   );
@@ -59,33 +51,9 @@ function HeroSection() {
   return (
     <section
       id="calculator"
-      className="hero relative flex min-h-screen scroll-mt-16 flex-col items-center justify-center overflow-hidden px-4 py-24"
+      className="hero relative flex min-h-screen scroll-mt-16 flex-col items-center justify-center overflow-hidden bg-overlay px-4 py-24"
     >
-      <div
-        className="absolute inset-0 grid grid-flow-dense grid-cols-4 grid-rows-3 gap-0.5"
-        aria-hidden="true"
-      >
-        {mosaic.map((tile) => (
-          <div
-            key={tile.id}
-            className="relative overflow-hidden bg-gray-900"
-            style={{
-              gridColumn: `span ${tile.columns}`,
-              gridRow: `span ${tile.rows}`,
-            }}
-          >
-            <Image
-              src={`https://images.unsplash.com/photo-${tile.id}?w=1200&h=900&fit=crop&auto=format`}
-              alt=""
-              fill
-              loading="eager"
-              sizes="(max-width: 640px) 50vw, 50vw"
-              className="object-cover saturate-[0.45] brightness-80"
-            />
-          </div>
-        ))}
-      </div>
-
+      <div className="hero-grid absolute inset-0" aria-hidden="true" />
       <div className="hero-scrim absolute inset-0" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col items-center gap-8 sm:gap-10">
@@ -114,35 +82,37 @@ function HeroSection() {
   );
 }
 
-function BuiltToBeFoundSection() {
+function CustomerPathSection() {
   return (
-    <section className="bg-background px-4 py-24 text-center">
-      <div className="mx-auto max-w-2xl space-y-6">
-        <h2 className="font-heading text-3xl font-medium leading-[1.1] tracking-tight text-foreground sm:text-[44px]">
-          Built to be found.
-          <br />
-          Built to be booked.
-        </h2>
-        <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-          We build practical booking and discovery systems around how customers find, understand,
-          and contact your business. No flash. Just infrastructure that works.
-        </p>
-      </div>
-    </section>
-  );
-}
+    <section className="bg-background px-4 py-24">
+      <div className="mx-auto max-w-4xl">
+        <div className="mx-auto mb-14 max-w-2xl space-y-5 text-center">
+          <SectionLabel>Your starting point</SectionLabel>
+          <h2 className="font-heading text-3xl font-medium leading-[1.12] tracking-tight text-foreground sm:text-[44px]">
+            Now follow the path that brings that client to you.
+          </h2>
+          <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+            The calculation gives us a number. The customer journey shows us where clearer digital
+            infrastructure could help.
+          </p>
+        </div>
 
-function ProblemSection() {
-  return (
-    <section className="bg-overlay px-4 py-24 text-center">
-      <div className="mx-auto max-w-xl space-y-5">
-        <SectionLabel accent>The problem</SectionLabel>
-        <h2 className="font-heading text-2xl font-medium leading-snug text-white sm:text-[32px]">
-          Right now, someone is searching for a business like yours.
-        </h2>
-        <p className="text-base leading-relaxed text-white/50">
-          If they land on a Facebook page with no reply, they book your competitor instead.
-        </p>
+        <ol className="grid list-none overflow-hidden rounded-xl border border-black/8 p-0 sm:grid-cols-3">
+          {customerPath.map((step) => (
+            <li
+              key={step.number}
+              className="border-b border-black/8 p-7 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0"
+            >
+              <p className="mb-8 font-heading text-xs font-medium tracking-[0.16em] text-accent">
+                {step.number}
+              </p>
+              <h3 className="mb-3 font-heading text-lg font-medium text-foreground">
+                {step.heading}
+              </h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{step.body}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
@@ -152,30 +122,67 @@ function ServicesSection() {
   return (
     <section id="services" className="scroll-mt-16 bg-background px-4 py-24">
       <div className="mx-auto max-w-4xl">
-        <div className="mb-12 text-center">
+        <div className="mx-auto mb-12 max-w-2xl space-y-4 text-center">
           <SectionLabel>What we build</SectionLabel>
+          <h2 className="font-heading text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-4xl">
+            Start with a clear customer-facing page.
+          </h2>
+          <p className="text-base leading-relaxed text-muted-foreground">
+            Add discovery and booking infrastructure where the way your business operates justifies
+            it.
+          </p>
         </div>
-        <div className="grid overflow-hidden rounded-xl border border-black/8 sm:grid-cols-3">
-          {marketingServices.map(({ slug, label, description }) => (
-              <article
-                key={slug}
-                className="flex flex-col border-b border-black/8 bg-background p-8 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0"
-              >
-                <div className="mb-6 flex size-9 items-center justify-center rounded-lg bg-primary text-white">
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          {homepageServices.map(({ slug, label, description }, index) => (
+            <article
+              key={slug}
+              className={`flex flex-col rounded-xl border border-black/8 p-8 ${
+                index === 0
+                  ? "bg-primary text-white sm:col-span-2 sm:grid sm:grid-cols-[1fr_auto] sm:items-end sm:gap-10"
+                  : "bg-background"
+              }`}
+            >
+              <div>
+                <div
+                  className={`mb-6 flex size-9 items-center justify-center rounded-lg ${
+                    index === 0 ? "bg-white/10 text-white" : "bg-primary text-white"
+                  }`}
+                >
                   <ServiceIcon slug={slug} className="size-5" />
                 </div>
-                <h3 className="mb-2 font-heading text-[15px] font-medium text-foreground">
+                {index === 0 ? (
+                  <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.18em] text-white/55">
+                    Core offer
+                  </p>
+                ) : null}
+                <h3
+                  className={`mb-2 font-heading font-medium ${
+                    index === 0 ? "text-xl text-white" : "text-[15px] text-foreground"
+                  }`}
+                >
                   {label}
                 </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
-                <Link
-                  href={`/services/${slug}`}
-                  className="mt-5 inline-flex items-center gap-2 self-start text-sm font-medium text-primary transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                <p
+                  className={`max-w-xl text-sm leading-relaxed ${
+                    index === 0 ? "text-white/65" : "text-muted-foreground"
+                  }`}
                 >
-                  Learn more
-                  <ArrowRight aria-hidden="true" className="size-4" />
-                </Link>
-              </article>
+                  {description}
+                </p>
+              </div>
+              <Link
+                href={`/services/${slug}`}
+                className={`mt-5 inline-flex items-center gap-2 self-start text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 ${
+                  index === 0
+                    ? "text-white hover:text-white/75 focus-visible:outline-white"
+                    : "text-primary hover:text-accent focus-visible:outline-primary"
+                }`}
+              >
+                Learn more
+                <ArrowRight aria-hidden="true" className="size-4" />
+              </Link>
+            </article>
           ))}
         </div>
       </div>
@@ -183,37 +190,23 @@ function ServicesSection() {
   );
 }
 
-function ProofSection() {
+function GroundingSection() {
   return (
-    <section className="bg-background px-4 py-4">
-      <div className="mx-auto max-w-2xl border-y border-black/8 py-16 text-center">
-        <p className="mb-3 font-heading text-5xl font-medium text-accent sm:text-6xl">
-          Your numbers
-        </p>
-        <p className="text-base text-muted-foreground">
-          should show whether a new system makes commercial sense for your business
-        </p>
-      </div>
-    </section>
-  );
-}
-
-function AudienceSection() {
-  return (
-    <section className="bg-background px-4 py-20">
-      <div className="mx-auto max-w-3xl text-center">
-        <div className="mb-8">
-          <SectionLabel>Who we work with</SectionLabel>
-        </div>
-        <ul className="flex list-none flex-wrap justify-center gap-3 p-0">
-          {audienceLabels.map((audience) => (
-            <li
-              key={audience}
-              className="rounded-full border border-primary/22 bg-primary/4 px-5 py-2 text-sm font-medium text-primary"
-            >
-              {audience}
-            </li>
-          ))}
+    <section className="bg-overlay px-4 py-16 text-white">
+      <div className="mx-auto max-w-4xl">
+        <ul className="grid list-none gap-8 p-0 text-center sm:grid-cols-3 sm:gap-0">
+          <li className="sm:border-r sm:border-white/10 sm:px-6">
+            <p className="font-heading text-base font-medium">Based in Lusaka</p>
+            <p className="mt-2 text-sm text-white/45">Built with local service businesses in mind.</p>
+          </li>
+          <li className="sm:border-r sm:border-white/10 sm:px-6">
+            <p className="font-heading text-base font-medium">Numbers in Kwacha</p>
+            <p className="mt-2 text-sm text-white/45">Commercial conversations in familiar terms.</p>
+          </li>
+          <li className="sm:px-6">
+            <p className="font-heading text-base font-medium">Direct on WhatsApp</p>
+            <p className="mt-2 text-sm text-white/45">A practical path from the page to a conversation.</p>
+          </li>
         </ul>
       </div>
     </section>
@@ -247,11 +240,9 @@ export function LandingPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <HeroSection />
-      <BuiltToBeFoundSection />
-      <ProblemSection />
+      <CustomerPathSection />
       <ServicesSection />
-      <ProofSection />
-      <AudienceSection />
+      <GroundingSection />
       <ProcessSection />
     </main>
   );

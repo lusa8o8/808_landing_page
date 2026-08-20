@@ -253,7 +253,33 @@ The next implementation slice is the approved services route family and standalo
 - Preserved production `noindex, nofollow`; this slice does not authorize search indexing.
 - Verification passed: 14 web/agent tests, web type-check, web lint, production web build, desktop service-index inspection, all three service detail pages, route metadata, mobile navigation, invalid-slug handling, and a live standalone-calculator conversation. The live salon case correctly returned K3,000 from K250 multiplied by 12 annual visits, with no application warnings.
 
-The next implementation slice should cover the approved industry route family. `/about` and `/contact` remain gated by the owner facts, response expectation, and contact-form delivery decisions recorded below.
+## 2026-08-20 discovery amendment: home-page narrative before product demo
+
+Fresh inspection found that the migrated home page still follows the parity-era sequence: calculator hero, positioning statement, isolated problem statement, three equally weighted service cards, a duplicate “Your numbers” section, broad audience pills, and the engagement process. The sections are individually understandable but do not form a strong progression after the calculator result.
+
+The next Phase 3 slice is therefore the home-page narrative and conversion pass, not the industry route family. It will:
+
+- Keep the calculator as the uncluttered hero interaction and remove the stock-photo mosaic so the working mechanism becomes the visual focus.
+- Connect the calculated client value to a simple customer path: found, understood, contacted or booked.
+- Present landing and service pages as the core offer, with booking and local discovery as supporting systems selected according to the business.
+- Remove the duplicate numbers section, unsupported social-proof substitutes, and broad industry pills.
+- Retain the existing numbers-first engagement process and direct WhatsApp/email contact path.
+- Avoid adding calculator warnings or the free-year booking promise in this slice.
+
+After this page passes build, accessibility, desktop, and mobile checks, the following slice may adapt the reviewed SnapBook HTML mock into one safe, fixture-backed interactive demo below the offer. It must not collect or persist real contact details, simulate a real booking, or compete with the calculator in the hero.
+
+Industry pages remain deferred until real customer research or approved evidence supports useful, differentiated content. `/about` and `/contact` remain gated by the owner facts, response expectation, and contact-form delivery decisions recorded below.
+
+### Home-page narrative implementation handoff
+
+- Replaced the stock-photo mosaic with a restrained brand-colour grid so the calculator is the hero's visual focus.
+- Replaced the disconnected positioning/problem sequence with a three-part customer path: found, understood, contacted or booked.
+- Reframed landing and service pages as the core offer and retained booking and local-search work as supporting systems.
+- Removed the duplicate numbers block and broad industry pills. Added only verifiable grounding statements: Lusaka, Kwacha, and direct WhatsApp contact.
+- Preserved the calculator copy without adding warnings or publishing the proposed free-year offer.
+- Corrected the calculator input's Enter-key path to use native form submission without an `any` cast.
+- Verification passed: 14 web/agent tests, repository-wide lint, web/admin type-check, production web build, and a live local HTTP/rendered-content smoke check. `/` remains statically prerendered.
+- Screenshot-based desktop/mobile inspection remains the release check for this slice because both available visual-control integrations were unavailable in the implementation session. Do not deploy this visual change without that inspection.
 
 ## Decision log and remaining approvals
 
