@@ -5,7 +5,7 @@ import { siteConfig } from "@/content/site";
 
 export function MarketingHeader() {
   return (
-    <header className="absolute inset-x-0 top-0 z-30 border-b border-white/10 bg-overlay/30 text-white backdrop-blur-sm">
+    <header className="absolute inset-x-0 top-0 z-30 bg-overlay/30 text-white backdrop-blur-sm">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
