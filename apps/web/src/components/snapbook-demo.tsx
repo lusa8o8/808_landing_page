@@ -40,9 +40,9 @@ const demoBusiness = {
   location: "Illustrative Lusaka salon",
   provider: "Maya",
   theme: {
-    "--snap-accent": "#26372d",
-    "--snap-signal": "#dca548",
-    "--snap-surface": "#f4efe3",
+    "--snap-accent": "var(--primary)",
+    "--snap-signal": "var(--accent)",
+    "--snap-surface": "var(--background)",
   } as DemoStyle,
   services: [
     {

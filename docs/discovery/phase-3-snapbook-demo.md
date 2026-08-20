@@ -73,4 +73,4 @@ The demo configuration will model the future tenant-controlled surface—busines
 - Added native button interactions, accessible selected states, keyboard focus treatments, a polite reschedule status, reset behavior, and explicit demo/no-booking language.
 - Verification passed: 14 web/agent tests, web lint, web type-check, production web build, and a live local rendered-content check. `/` remains statically prerendered; the SnapBook interaction is the intentional client island.
 - The live rendered page contains the product-preview heading and contains no telephone input, `sb_guest` storage key, or Unsplash dependency. Source inspection found no storage, network, scarcity, rating, reminder-delivery, or calendar-action implementation.
-- Desktop/mobile interaction and visual acceptance remain the final gate before this commit is pushed to `origin/main` and allowed to deploy.
+- Desktop/mobile interaction and visual acceptance were completed by the owner on 2026-08-20. The six-state flow, simplicity, usefulness, and forest/amber product-preview colours were approved for release.
