@@ -279,7 +279,7 @@ Industry pages remain deferred until real customer research or approved evidence
 - Preserved the calculator copy without adding warnings or publishing the proposed free-year offer.
 - Corrected the calculator input's Enter-key path to use native form submission without an `any` cast.
 - Verification passed: 14 web/agent tests, repository-wide lint, web/admin type-check, production web build, and a live local HTTP/rendered-content smoke check. `/` remains statically prerendered.
-- Screenshot-based desktop/mobile inspection remains the release check for this slice because both available visual-control integrations were unavailable in the implementation session. Do not deploy this visual change without that inspection.
+- Manual desktop/mobile inspection was completed and accepted by the owner on 2026-08-20. The restrained design and current copy are approved as a temporary baseline; both may be refined later using observed visitor behaviour rather than delaying the next product-demo slice.
 
 ## Decision log and remaining approvals
 
