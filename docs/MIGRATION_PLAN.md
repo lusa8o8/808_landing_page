@@ -6,6 +6,7 @@ Migrate the current Vite landing page into a production-ready pnpm monorepo with
 
 - A public Next.js App Router application.
 - A separately deployable Next.js admin application for an admin subdomain.
+- A separately deployable SnapBook React application with iframe and full-page/PWA shells.
 - Shared, deliberately bounded packages.
 - Supabase as the data, authentication, storage, and Edge Function platform.
 - A hardened and measurable LTV agent.
@@ -49,11 +50,13 @@ Each phase ends with:
 .
 |-- apps/
 |   |-- web/                       # Public Next.js application
-|   `-- admin/                     # Admin-subdomain Next.js application
+|   |-- admin/                     # Admin-subdomain Next.js application
+|   `-- snapbook/                  # Embed and customer PWA shells
 |-- packages/
 |   |-- brand/                     # Tokens, fonts, logos, shared assets
 |   |-- contracts/                 # Runtime schemas and transport types
 |   |-- database/                  # Supabase types and client factories
+|   |-- snapbook-core/             # Booking states and domain rules
 |   |-- ui/                        # Reusable presentational primitives
 |   |-- eslint-config/
 |   `-- typescript-config/
@@ -70,6 +73,8 @@ Each phase ends with:
 ```
 
 Packages are introduced only when at least two consumers or a clear security/type boundary justify them. The target tree is a direction, not permission to create empty abstractions.
+
+The SnapBook product track uses `S0`-`S6` identifiers so the existing public-site, admin, agent, and deployment phases do not need to be renumbered. Its current discovery baseline is `docs/discovery/snapbook-product-foundation-v1.md`. SnapBook work may proceed alongside the remaining website release gate, but no operational booking endpoint may accept real customer data until the applicable Phase 4 hardening and SnapBook trust-boundary checks pass.
 
 ## Phase 0: Baseline and architectural decisions
 
@@ -228,6 +233,32 @@ The proposed free-year booking offer is intentionally excluded from public copy 
 - Approved routes are content-complete enough to publish.
 - Search and social metadata are correct without requiring client JavaScript.
 - Preview environments remain non-indexable.
+
+## Parallel product track: SnapBook S0-S6
+
+SnapBook is a separately deployable product track, not an extension of the marketing-site component. Its detailed journey contract, architecture direction, trust boundaries, decisions, and exit criteria are versioned in `docs/discovery/snapbook-product-foundation-v1.md`.
+
+The track is ordered as follows:
+
+1. `S0` - reusable product and journey contract.
+2. `S1` - fixture-backed booking core plus embed and full-page/PWA shells.
+3. `S2` - tenant, availability, RLS, transactional hold, and booking data foundation.
+4. `S3` - operational booking, management links, rescheduling, cancellation, validation, idempotency, and abuse controls.
+5. `S4` - production iframe loader and versioned host-page integration contract.
+6. `S5` - installable PWA and first-party returning-customer experience.
+7. `S6` - minimum operator workflow in `apps/admin`, pilot hardening, and controlled launch.
+
+Track guardrails:
+
+- No native mobile application is planned in this track.
+- The first screen uses services and suggested slots rather than a calendar.
+- One shared multi-tenant service supports every tenant; industry-specific application forks are not allowed.
+- Embed and PWA shells use the same domain rules and runtime-validated configuration.
+- The standard booking flow excludes sensitive and free-form customer context.
+- No operational endpoint accepts real customer data until tenant isolation, validation, concurrency, audit, and abuse boundaries pass review.
+- Each `S` slice begins with the same fresh-discovery operating rule as the numbered migration phases and ends with a focused commit and handoff.
+
+Dependencies remain explicit: `S4` must coordinate with the Phase 4 CSP and public-site hardening work, and the authenticated tenant workflow in `S6` depends on the Phase 5 admin/authentication foundation. `S1` can begin before those phases because it is fixture-backed and accepts no real customer data.
 
 ## Phase 4: Public-site production hardening
 
