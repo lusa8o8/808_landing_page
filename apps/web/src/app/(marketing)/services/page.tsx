@@ -5,15 +5,14 @@ import Link from "next/link";
 import { MarketingPageHero } from "@/components/marketing-page-hero";
 import { ServiceIcon } from "@/components/service-icon";
 import { publishedServices } from "@/content/marketing";
+import { createPageMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Services",
   description:
     "Clear websites with included SnapBook booking and accurate local business details in Lusaka.",
-  alternates: {
-    canonical: "/services",
-  },
-};
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (

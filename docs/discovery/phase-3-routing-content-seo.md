@@ -359,7 +359,7 @@ Primary references:
 ### Proposed implementation design
 
 1. Add one server/build-time policy flag, `SITE_INDEXING_ENABLED`, with a fail-closed default. Only the Vercel Production environment may eventually set it to `true`; Preview and Development must leave it unset or `false`.
-2. Centralize the policy so root metadata and `robots.ts` cannot drift. A false policy emits `noindex, nofollow` and a crawl restriction; a true policy emits index/follow metadata and permits crawling of the public surface.
+2. Centralize the policy so root metadata and `robots.ts` cannot drift. A false policy emits `noindex, nofollow`, permits crawlers to read that directive, and omits the sitemap; a true policy emits index/follow metadata and advertises the approved public surface.
 3. Add an explicit home canonical and complete inherited Open Graph and Twitter metadata using the canonical origin, public brand name, current description, and `en_ZM` locale.
 4. Add a brand-native 1200x630 generated Open Graph image using the approved colour and typography direction. It must not introduce an unapproved logo, testimonial, client claim, or offer.
 5. Add `sitemap.ts` with only the six approved canonical URLs. Avoid synthetic `lastModified` values and speculative priorities; add dates later only when backed by content records.
@@ -385,3 +385,18 @@ After enablement, verify the live meta directives, robots file, sitemap, canonic
 ### Next implementation slice
 
 Implement the environment-safe metadata foundation, generated share image, robots route, sitemap route, minimal verified Organization JSON-LD, and regression tests as one cohesive SEO-foundation change. Deploy it in the fail-closed state. Enabling indexing remains a separate configuration change and explicit sign-off checkpoint.
+
+### SEO-foundation implementation handoff
+
+- Completed on 2026-08-21 without enabling production indexing.
+- Added a centralized, fail-closed `SITE_INDEXING_ENABLED` policy. Only the exact value `true` enables indexing; missing, malformed, local, and preview values remain disabled.
+- Added self-referencing canonical metadata and route-specific Open Graph and Twitter metadata across all six public routes.
+- Added brand-native 1200x630 Open Graph and Twitter images using only the approved palette, public positioning, and Lusaka location.
+- Added a generated `robots.txt`. In the disabled state it permits crawlers to read the page-level `noindex` directive but does not advertise a sitemap. In the enabled state it adds the canonical host and sitemap location.
+- Added a generated sitemap that is empty while indexing is disabled and contains exactly the six approved canonical URLs when enabled.
+- Added minimal `Organization` JSON-LD to the home page only, using the public name, canonical URL, email, telephone, and Lusaka service area. It does not claim an address, opening hours, reviews, ratings, logo, or client evidence.
+- Documented the Vercel environment variable in `apps/web/.env.example`; no production or preview environment value was changed.
+- Added regression coverage for the fail-closed parser, both robots states, the exact sitemap allowlist, approved Organization facts, and safe JSON-LD serialization.
+- Verification passed: 19 tests, repository-wide lint and type-check, repository-wide production build, a separate indexing-enabled integration build, a restored fail-closed production build, generated metadata inspection for all six routes, and visual inspection of the generated share image.
+
+The remaining Phase 3 work is deployment and custom-domain verification in the disabled state, followed by the separate indexing release gate. Production must not receive `SITE_INDEXING_ENABLED=true` until that verification is complete and the owner explicitly approves the switch.

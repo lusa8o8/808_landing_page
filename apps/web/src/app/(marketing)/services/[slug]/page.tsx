@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 
 import { MarketingPageHero } from "@/components/marketing-page-hero";
 import { getPublishedService, publishedServices } from "@/content/marketing";
+import { createPageMetadata } from "@/lib/page-metadata";
 
 type ServicePageProps = {
   params: Promise<{ slug: string }>;
@@ -24,13 +25,11 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
     return {};
   }
 
-  return {
+  return createPageMetadata({
     title: service.label,
     description: service.description,
-    alternates: {
-      canonical: `/services/${service.slug}`,
-    },
-  };
+    path: `/services/${service.slug}`,
+  });
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {

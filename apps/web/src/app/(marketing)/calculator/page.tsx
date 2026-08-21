@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 
 import { LtvChat } from "@/components/ltv-chat";
+import { createPageMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Annual client value calculator",
   description:
     "Estimate what one returning customer may be worth each year using average spend and repeat visits.",
-  alternates: {
-    canonical: "/calculator",
-  },
-};
+  path: "/calculator",
+});
 
 export default function CalculatorPage() {
   return (
