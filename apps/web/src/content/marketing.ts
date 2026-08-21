@@ -4,9 +4,10 @@ export const marketingServices = defineMarketingServices([
   {
     slug: "booking-systems",
     label: "Booking systems",
-    description: "Let clients request or reserve time without relying on DMs or missed calls.",
+    description:
+      "Every 808 website includes SnapBook, giving clients a clear path to request or reserve time.",
     intro:
-      "Create one clear path from customer interest to an appointment request, with the right information collected before your team follows up.",
+      "SnapBook gives customers one clear path from interest to an appointment request and is included with every 808 website. Deeper scheduling features are added only when the workflow justifies them.",
     bestFor:
       "Appointment-led service businesses that have capacity to grow and want a more consistent alternative to scattered calls and messages.",
     outcomes: [
@@ -22,7 +23,7 @@ export const marketingServices = defineMarketingServices([
       "Clear confirmation and next-step messaging.",
     ],
     boundaries: [
-      "The exact booking flow is scoped around the way your business actually operates.",
+      "Standard SnapBook configuration is included with every website; custom workflows and integrations are scoped separately.",
       "If customer payments are included, funds use your approved payment provider and go directly to your business.",
       "Clinical, legal, and other regulated records stay in systems designed for that information.",
     ],
@@ -129,16 +130,26 @@ export const marketingServices = defineMarketingServices([
       {
         question: "Can the catalogue change later?",
         answer:
-          "Yes. The update and support path is agreed with you so that published services and prices do not silently become outdated.",
+          "Yes. Reasonable corrections to existing business details are included in routine maintenance for the first 365 days. New pages, redesigns, integrations, and substantial feature or content changes are scoped separately.",
       },
     ],
     status: "published",
   },
 ]);
 
-export const publishedServices = marketingServices.filter(
-  (service) => service.status === "published",
-);
+const publishedServicePriority: Record<string, number> = {
+  "service-and-pricing-pages": 0,
+  "booking-systems": 1,
+  "local-search-and-maps": 2,
+};
+
+export const publishedServices = marketingServices
+  .filter((service) => service.status === "published")
+  .sort(
+    (first, second) =>
+      (publishedServicePriority[first.slug] ?? Number.MAX_SAFE_INTEGER) -
+      (publishedServicePriority[second.slug] ?? Number.MAX_SAFE_INTEGER),
+  );
 
 export function getPublishedService(slug: string) {
   return publishedServices.find((service) => service.slug === slug);
@@ -156,17 +167,17 @@ export const audienceLabels = [
 export const processSteps = defineProcessSteps([
   {
     number: "01",
-    heading: "We run the numbers with you",
-    body: "You tell us about your business. We calculate whether building a system makes financial sense before anything else.",
+    heading: "We start with the numbers",
+    body: "You tell us about your business. We use the numbers to decide whether a website project makes financial sense before defining the scope.",
   },
   {
     number: "02",
-    heading: "We build your system",
-    body: "We turn approved business facts into a clear, practical system built around how your customers find and contact you.",
+    heading: "We define and build the right website",
+    body: "We turn approved business facts into a clear website built around how your customers find, understand, and contact you.",
   },
   {
     number: "03",
-    heading: "You launch with clear terms",
-    body: "Your business content and domain remain yours. Any ongoing platform service, support, or handover is documented before you approve it.",
+    heading: "You launch with a supported first year",
+    body: "Your business content and domain remain yours. SnapBook, hosting and routine maintenance are included for the first 365 days at no additional cost.",
   },
 ]);

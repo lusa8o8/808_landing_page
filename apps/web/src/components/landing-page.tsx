@@ -88,13 +88,13 @@ function CustomerPathSection() {
     <section className="bg-background px-4 py-24">
       <div className="mx-auto max-w-4xl">
         <div className="mx-auto mb-14 max-w-2xl space-y-5 text-center">
-          <SectionLabel>Your starting point</SectionLabel>
+          <SectionLabel>From value to action</SectionLabel>
           <h2 className="font-heading text-3xl font-medium leading-[1.12] tracking-tight text-foreground sm:text-[44px]">
-            Now follow the path that brings that client to you.
+            A valuable client still needs a clear path to your business.
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-            The calculation gives us a number. The customer journey shows us where clearer digital
-            infrastructure could help.
+            Your website should help the right customer find you, understand your offer, and take
+            the next step.
           </p>
         </div>
 
@@ -124,13 +124,13 @@ function ServicesSection() {
     <section id="services" className="scroll-mt-16 bg-background px-4 py-24">
       <div className="mx-auto max-w-4xl">
         <div className="mx-auto mb-12 max-w-2xl space-y-4 text-center">
-          <SectionLabel>What we build</SectionLabel>
+          <SectionLabel>The 808 website</SectionLabel>
           <h2 className="font-heading text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-4xl">
-            Start with a clear customer-facing page.
+            One clear place for customers to understand your business and act.
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
-            Add discovery and booking infrastructure where the way your business operates justifies
-            it.
+            Website projects start at K12,000. Every 808 website includes SnapBook, hosting and
+            routine maintenance for the first 365 days at no additional cost.
           </p>
         </div>
 

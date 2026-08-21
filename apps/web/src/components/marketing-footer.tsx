@@ -7,8 +7,12 @@ export function MarketingFooter() {
     <footer id="contact" className="bg-primary px-4 py-24 text-center text-white">
       <div className="mx-auto max-w-lg space-y-8">
         <h2 className="font-heading text-2xl font-medium leading-snug sm:text-[32px]">
-          Ready to see whether the numbers work for your business?
+          Ready to give your customers a clearer next step?
         </h2>
+
+        <p className="text-sm leading-relaxed text-white/60 sm:text-base">
+          We’ll start with the numbers, then recommend the right scope.
+        </p>
 
         <a
           href={siteConfig.whatsappHref}
@@ -16,7 +20,7 @@ export function MarketingFooter() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-lg bg-accent px-8 py-3.5 text-sm font-medium text-primary transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:opacity-75"
         >
-          Start on WhatsApp
+          Start a WhatsApp conversation
           <ArrowRight aria-hidden="true" className="size-4" />
         </a>
 

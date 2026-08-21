@@ -8,7 +8,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
   title: {
-    default: "808 Digital Systems | Booking and discovery systems",
+    default: "808 Digital Systems | Websites for Lusaka service businesses",
     template: "%s | 808 Digital Systems",
   },
   description: siteConfig.description,

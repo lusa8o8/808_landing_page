@@ -152,14 +152,14 @@ export function SnapbookDemo() {
       <div className="mx-auto grid max-w-5xl items-center gap-14 lg:grid-cols-[minmax(0,1fr)_420px]">
         <div className="max-w-xl space-y-7">
           <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-primary">
-            Product preview
+            SnapBook, included
           </p>
           <h2 className="font-heading text-3xl font-medium leading-[1.12] tracking-tight text-foreground sm:text-[44px]">
-            See the path from interest to appointment.
+            Let customers move from interest to appointment.
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Walk through a fictional salon example, then preview the repeat-booking and rescheduling
-            experience. Nothing is submitted, stored, or booked.
+            Try the booking path using a fictional Lusaka salon, then preview repeat booking and
+            rescheduling. This demo does not submit, store or book anything.
           </p>
           <ul className="space-y-4 text-sm text-foreground/75">
             <li className="flex gap-3">

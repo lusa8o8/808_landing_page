@@ -9,7 +9,7 @@ import { publishedServices } from "@/content/marketing";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Booking, local discovery, and service information systems for service businesses in Lusaka.",
+    "Clear websites with included SnapBook booking and practical local discovery support in Lusaka.",
   alternates: {
     canonical: "/services",
   },
@@ -18,13 +18,27 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <main>
-      <MarketingPageHero eyebrow="Services" title="Practical systems for the customer journey.">
-        We focus on the points where a customer needs to find you, understand the offer, and take
-        the next step without unnecessary friction.
+      <MarketingPageHero eyebrow="Services" title="Websites built around the customer journey.">
+        Give customers one clear place to find your business, understand the offer, and take the
+        next step without unnecessary friction.
       </MarketingPageHero>
 
       <section className="bg-background px-4 py-20 sm:py-24">
         <div className="mx-auto max-w-5xl">
+          <div className="mb-10 rounded-xl border border-primary/12 bg-primary/5 p-6 sm:p-8">
+            <p className="font-heading text-xs font-medium uppercase tracking-[0.18em] text-primary">
+              Starting point
+            </p>
+            <h2 className="mt-3 font-heading text-2xl font-medium text-foreground sm:text-3xl">
+              Website projects start at K12,000.
+            </h2>
+            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+              Every 808 website includes SnapBook, hosting and routine maintenance for the first 365
+              days at no additional cost. The exact pages, booking configuration and project scope
+              are agreed before work begins.
+            </p>
+          </div>
+
           <div className="grid gap-5 md:grid-cols-3">
             {publishedServices.map((service) => (
               <article
@@ -57,7 +71,7 @@ export default function ServicesPage() {
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-white/60 sm:text-base">
               Use the calculator to estimate what one returning customer is worth before deciding
-              which system deserves attention first.
+              what your website needs to do first.
             </p>
             <Link
               href="/calculator"

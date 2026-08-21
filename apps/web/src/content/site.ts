@@ -4,7 +4,7 @@ export const siteConfig = defineSiteConfig({
   name: "Eightzeroeight Digital Systems",
   shortName: "808 Digital Systems",
   description:
-    "Practical booking and discovery systems for service businesses in Lusaka, Zambia.",
+    "Clear websites with included SnapBook booking for service businesses in Lusaka, Zambia.",
   siteUrl: "https://www.eightzeroeight.online",
   locale: "en_ZM",
   location: "Lusaka, Zambia",

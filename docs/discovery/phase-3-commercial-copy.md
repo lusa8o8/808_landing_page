@@ -194,3 +194,26 @@ The page structure and styling should remain stable unless rendered copy creates
 4. Render desktop and mobile pages and tighten only copy-related wrapping or spacing.
 5. Run automated checks and inspect the generated HTML for approved and prohibited claims.
 6. Commit the copy implementation separately from this discovery record.
+
+## Implementation handoff
+
+- Implemented: 2026-08-21
+- The calculator hero and LTV interaction were left unchanged.
+- The homepage now connects annual client value to the customer journey and presents the website as the paid core offer.
+- The homepage and services index now state that website projects start at K12,000 and include SnapBook, hosting, and routine maintenance for the first 365 days at no additional cost.
+- SnapBook is described as an inclusion in every website rather than a separately priced product.
+- The SnapBook demonstration still starts with first-time service selection and retains its non-submission statement and existing interaction logic.
+- The services index now orders landing and service pages before booking and local-search support.
+- Booking boundaries now distinguish included standard SnapBook configuration from separately scoped custom workflows and integrations.
+- The landing/service-page FAQ now distinguishes routine first-year corrections from new pages, redesigns, integrations, and substantial feature or content work.
+- Shared metadata, process copy, and the footer CTA now lead with websites and the approved customer journey.
+
+Verification passed:
+
+- 14 web and abuse-control tests.
+- Web lint.
+- Web type-check.
+- Production web build and static generation of all public routes.
+- Generated home and services HTML review for message order, approved claims, contact destinations, service-card order, and prohibited commercial language.
+
+No new dependency, route, pricing tier card, social-proof claim, urgency claim, or agent-contract change was introduced. A manual mobile and desktop viewport check remains part of the deployment smoke test because the change increases text length in the core-offer and process sections.
