@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">SnapBook</title>
+  <rect width="512" height="512" rx="112" fill="#26372d"/>
+  <path d="M145 133h222v246H145z" fill="#f4efe3"/>
+  <path d="M184 196h144M184 256h144M184 316h82" stroke="#26372d" stroke-width="28" stroke-linecap="round"/>
+  <circle cx="342" cy="336" r="67" fill="#dca548"/>
+  <path d="m313 337 20 20 39-45" fill="none" stroke="#26372d" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

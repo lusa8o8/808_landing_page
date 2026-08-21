@@ -437,6 +437,8 @@ This document is the baseline. Exit when the journey, boundaries, provisional de
 - Run tenant-isolation, concurrency, abuse, accessibility, performance, recovery, and operational support exercises.
 - Launch with one deliberately simple service-business pilot before enabling broader capabilities.
 
-## Immediate next slice
+## Current handoff
 
-After owner review of this discovery baseline, begin S1 with another fresh repository and framework discovery. S1 must not create database migrations, collect real customer data, or connect the marketing demo to operational endpoints. Its purpose is to prove the reusable journey and configuration contract in two real delivery shells before the backend makes those decisions expensive to change.
+S1 was completed on 2026-08-21. Its fresh discovery, exact exclusions, verification evidence, deliberate debt, and implementation handoff are recorded in `docs/discovery/snapbook-s1-reusable-shells.md`.
+
+The next slice is S2. It must start with fresh discovery of the booking-domain invariants, current Supabase state, data-region implications, RLS and transaction requirements, and the smallest persistence seam behind the proven transition vocabulary. S1 fixture mode remains available for safe product review and regression tests while that foundation is designed.

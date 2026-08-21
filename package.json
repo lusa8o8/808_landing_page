@@ -8,21 +8,23 @@
     "node": ">=20.9.0"
   },
   "scripts": {
-    "build": "pnpm run build:web && pnpm run build:admin && pnpm run build:legacy",
+    "build": "pnpm run build:web && pnpm run build:admin && pnpm run build:snapbook && pnpm run build:legacy",
     "build:web": "pnpm --filter @808/web build",
     "build:admin": "pnpm --filter @808/admin build",
+    "build:snapbook": "pnpm --filter @808/snapbook build",
     "build:legacy": "vite build",
     "dev": "pnpm run dev:web",
     "dev:web": "pnpm --filter @808/web dev",
     "dev:admin": "pnpm --filter @808/admin dev",
+    "dev:snapbook": "pnpm --filter @808/snapbook dev",
     "dev:legacy": "vite",
     "eval:ltv": "node scripts/evaluate-ltv-agent.mjs",
     "eval:ltv:report": "node scripts/render-ltv-eval.mjs",
     "eval:ltv:compare": "node scripts/compare-ltv-evals.mjs",
     "design:ltv:report": "node scripts/render-agent-design.mjs docs/architecture/ltv-agent/agent-design.md docs/architecture/ltv-agent/agent-manifest.json docs/architecture/ltv-agent/agent-design.html",
-    "lint": "pnpm --filter @808/web lint && pnpm --filter @808/admin lint",
-    "typecheck": "pnpm --filter @808/web typecheck && pnpm --filter @808/admin typecheck",
-    "test": "pnpm --filter @808/web test && pnpm --filter @808/admin test"
+    "lint": "pnpm --filter @808/web lint && pnpm --filter @808/admin lint && pnpm --filter @808/snapbook lint",
+    "typecheck": "pnpm --filter @808/web typecheck && pnpm --filter @808/admin typecheck && pnpm --filter @808/snapbook typecheck",
+    "test": "pnpm --filter @808/web test && pnpm --filter @808/admin test && pnpm --filter @808/snapbook test"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",

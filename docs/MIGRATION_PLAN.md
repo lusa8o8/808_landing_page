@@ -238,11 +238,11 @@ The proposed free-year booking offer is intentionally excluded from public copy 
 
 SnapBook is a separately deployable product track, not an extension of the marketing-site component. Its detailed journey contract, architecture direction, trust boundaries, decisions, and exit criteria are versioned in `docs/discovery/snapbook-product-foundation-v1.md`.
 
-The track is ordered as follows:
+The track is ordered as follows. Status was last reconciled on 2026-08-21:
 
-1. `S0` - reusable product and journey contract.
-2. `S1` - fixture-backed booking core plus embed and full-page/PWA shells.
-3. `S2` - tenant, availability, RLS, transactional hold, and booking data foundation.
+1. `S0` - reusable product and journey contract. **Complete.**
+2. `S1` - fixture-backed booking core plus embed and full-page/PWA shells. **Complete.** See `docs/discovery/snapbook-s1-reusable-shells.md`.
+3. `S2` - tenant, availability, RLS, transactional hold, and booking data foundation. **Next; fresh discovery required.**
 4. `S3` - operational booking, management links, rescheduling, cancellation, validation, idempotency, and abuse controls.
 5. `S4` - production iframe loader and versioned host-page integration contract.
 6. `S5` - installable PWA and first-party returning-customer experience.
