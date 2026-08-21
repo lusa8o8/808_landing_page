@@ -59,7 +59,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
           <div className="mt-10 rounded-xl border border-primary/12 bg-primary/5 p-6 sm:p-8">
             <p className="font-heading text-xs font-medium uppercase tracking-[0.18em] text-primary">
-              Best suited to
+              This may suit you if
             </p>
             <p className="mt-3 max-w-3xl text-base leading-relaxed text-foreground">
               {service.bestFor}
@@ -69,10 +69,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <div className="mt-16 grid gap-12 lg:grid-cols-2 lg:gap-16">
             <section aria-labelledby="outcomes-heading">
               <p className="font-heading text-xs font-medium uppercase tracking-[0.18em] text-accent-strong">
-                Customer outcomes
+                What this helps with
               </p>
               <h2 id="outcomes-heading" className="mt-3 font-heading text-3xl font-medium">
-                What should become clearer
+                What this can make easier
               </h2>
               <ul className="mt-7 space-y-4">
                 {service.outcomes.map((outcome) => (
@@ -86,7 +86,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
             <section aria-labelledby="scope-heading">
               <p className="font-heading text-xs font-medium uppercase tracking-[0.18em] text-accent-strong">
-                Typical scope
+                What we can build
               </p>
               <h2 id="scope-heading" className="mt-3 font-heading text-3xl font-medium">
                 What the build can include
@@ -111,12 +111,14 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <div className="mx-auto grid max-w-5xl gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           <div>
             <p className="font-heading text-xs font-medium uppercase tracking-[0.18em] text-accent">
-              Clear boundaries
+              What to know
             </p>
-            <h2 className="mt-3 font-heading text-3xl font-medium">Scope without surprises</h2>
+            <h2 className="mt-3 font-heading text-3xl font-medium">
+              What is and is not included
+            </h2>
             <p className="mt-5 text-sm leading-relaxed text-white/55">
-              The right system depends on your workflow. These boundaries keep the public promise
-              accurate before a detailed scope is agreed.
+              What you need depends on how your business works and how customers contact you. We
+              agree on what we will build before the work starts.
             </p>
           </div>
           <ul className="space-y-4">
@@ -138,7 +140,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             Common questions
           </p>
           <h2 className="mt-3 text-center font-heading text-3xl font-medium">
-            Before we define the scope
+            Questions business owners ask
           </h2>
           <div className="mt-9 divide-y divide-black/8 border-y border-black/8">
             {service.faqs.map((faq) => (

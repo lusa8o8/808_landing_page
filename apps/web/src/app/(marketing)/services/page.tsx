@@ -9,7 +9,7 @@ import { publishedServices } from "@/content/marketing";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Clear websites with included SnapBook booking and practical local discovery support in Lusaka.",
+    "Clear websites with included SnapBook booking and accurate local business details in Lusaka.",
   alternates: {
     canonical: "/services",
   },
@@ -18,9 +18,12 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <main>
-      <MarketingPageHero eyebrow="Services" title="Websites built around the customer journey.">
-        Give customers one clear place to find your business, understand the offer, and take the
-        next step without unnecessary friction.
+      <MarketingPageHero
+        eyebrow="Services"
+        title="Websites that help customers find you, understand your services and get in touch."
+      >
+        Put your services, prices, location and contact details in one place, then give customers a
+        clear way to call, message or book.
       </MarketingPageHero>
 
       <section className="bg-background px-4 py-20 sm:py-24">
@@ -34,8 +37,8 @@ export default function ServicesPage() {
             </h2>
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
               Every 808 website includes SnapBook, hosting and routine maintenance for the first 365
-              days at no additional cost. The exact pages, booking configuration and project scope
-              are agreed before work begins.
+              days at no additional cost. Before we start, we agree on the pages, booking setup,
+              price and what we will build.
             </p>
           </div>
 
@@ -58,7 +61,7 @@ export default function ServicesPage() {
                   href={`/services/${service.slug}`}
                   className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-accent-strong focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
                 >
-                  Explore this service
+                  See what we can build
                   <ArrowRight aria-hidden="true" className="size-4" />
                 </Link>
               </article>
@@ -67,11 +70,11 @@ export default function ServicesPage() {
 
           <div className="mt-16 rounded-xl bg-primary px-6 py-10 text-center text-white sm:px-10">
             <h2 className="font-heading text-2xl font-medium sm:text-3xl">
-              Start with the economics, not a feature list.
+              Check what one returning customer is worth.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-white/60 sm:text-base">
-              Use the calculator to estimate what one returning customer is worth before deciding
-              what your website needs to do first.
+              Use the calculator to estimate their annual value, then decide what your website needs
+              to do first.
             </p>
             <Link
               href="/calculator"
