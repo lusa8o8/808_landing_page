@@ -46,7 +46,7 @@
 .slot-button:hover, .slot-button[aria-pressed="true"] { border-color: var(--snap-accent); background: color-mix(in srgb, var(--snap-signal) 16%, #fff); }
 .slot-button span { color: #61655e; font-size: .82rem; }
 .primary-button, .secondary-button, .danger-button { min-height: 48px; padding: 12px 18px; border-radius: 999px; font-weight: 800; cursor: pointer; }
-.primary-button { border: 1px solid var(--snap-accent); background: var(--snap-accent); color: #fff; }
+.booking-page .primary-button { border: 1px solid var(--snap-accent); background: var(--snap-accent); color: #fff; }
 .secondary-button { border: 1px solid #cbc9bf; background: #fff; color: var(--snap-accent); }
 .danger-button { border: 1px solid #9b382e; background: #9b382e; color: #fff; }
 .primary-button:disabled { opacity: .45; cursor: not-allowed; }
@@ -81,8 +81,6 @@
   .booking-page--full { padding: 0; }
   .booking-page--full .booking-shell { min-height: 100dvh; border: 0; border-radius: 0; box-shadow: none; }
   .booking-page--full .scenario-panel { margin: 0; width: 100%; border-width: 1px 0 0; border-radius: 0; }
-  .slot-grid { grid-template-columns: 1fr; }
-  .slot-button { grid-template-columns: 1fr auto; text-align: left; }
   .booking-footer { flex-direction: column; }
 }
 
