@@ -13,7 +13,7 @@ SnapBook should become a separately deployable product rather than additional st
 1. an isolated widget embedded in a client's website; and
 2. a full-page, installable React PWA for repeat visits and booking management.
 
-Both surfaces must use the same journey rules, tenant configuration, validation, availability service, and booking API. The existing `apps/web` demo remains illustrative marketing content and must not become the production booking client.
+Both surfaces must use the same journey rules, tenant configuration, validation, availability service, and booking API. The `apps/web` preview may consume the reviewed fixture-only interface, but it must not become an operational booking client.
 
 The reusable product is defined by stable workflow rules and a configurable tenant boundary. It is not defined by separate salon, clinic, guesthouse, or professional-services applications. Industry-specific differences should be expressed through services, resources, policies, wording, and explicitly approved capabilities rather than copied applications or conditionals scattered through the UI.
 
@@ -252,9 +252,13 @@ apps/snapbook
 apps/admin
   Authenticated tenant/operator workflows
 
+packages/snapbook-prototype
+  Current fixture configuration, in-memory transitions and
+  reviewed preview interface shared by web and SnapBook
+
 packages/snapbook-core
-  Booking states, transition rules, availability inputs,
-  configuration types, validation and provider-neutral use cases
+  Future operational booking states, availability inputs,
+  validation and provider-neutral use cases
 
 packages/contracts
   Runtime-validated request/response contracts shared by
@@ -265,7 +269,7 @@ supabase
   audit events and migrations
 ```
 
-`packages/snapbook-core` is justified when both embed and PWA shells begin consuming the same tested workflow. A general shared UI package remains deferred until a second application genuinely needs the same presentational components.
+`packages/snapbook-prototype` became justified when the public web preview and standalone SnapBook application both needed the same tested fixture journey. It remains explicitly fixture-only. `packages/snapbook-core` is deferred until S2/S3 establish operational contracts that server and admin consumers can safely share. A general cross-product UI package remains deferred.
 
 ### Multi-tenant service boundary
 
@@ -376,7 +380,7 @@ Full visual customization, reporting, bulk operations, staff role delegation, an
 - No calendar on the first screen; suggested slots precede the optional date browser.
 - One reusable workflow is configured per tenant; industry forks are rejected.
 - The booking backend remains one shared multi-tenant service.
-- The marketing demo remains separate from the operational product.
+- The marketing preview shares the reviewed fixture package but remains disconnected from the operational product and customer data.
 - Tenant brand configuration may change presentation but not validation, security, or core journey rules.
 - Sensitive and free-form context is excluded from the standard booking record.
 - The initial product is single-location, network-required, payment-free, and integration-light.

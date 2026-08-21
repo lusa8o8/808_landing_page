@@ -1,0 +1,27 @@
+{
+  "name": "@808/snapbook-prototype",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "exports": {
+    ".": "./src/index.ts",
+    "./fixtures": "./src/domain/fixtures.ts",
+    "./tenant-config": "./src/domain/tenant-config.ts",
+    "./styles.css": "./src/styles.css"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test --test-isolation=none src/domain/tenant-config.test.ts src/domain/booking-machine.test.ts"
+  },
+  "dependencies": {
+    "react": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "16.3.1",
+    "typescript": "^5.9.3"
+  }
+}

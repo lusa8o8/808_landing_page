@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { tenantFixtures } from "../domain/fixtures.ts";
+import { tenantFixtures } from "@808/snapbook-prototype/fixtures";
 import { buildTenantManifest } from "./tenant-manifest.ts";
 
 test("each tenant has a stable distinct install identity within the booking scope", () => {

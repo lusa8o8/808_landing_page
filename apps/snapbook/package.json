@@ -9,9 +9,10 @@
     "start": "next start --port 3002",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "node --test --test-isolation=none src/domain/tenant-config.test.ts src/domain/booking-machine.test.ts src/pwa/tenant-manifest.test.ts"
+    "test": "node --test --test-isolation=none src/pwa/tenant-manifest.test.ts"
   },
   "dependencies": {
+    "@808/snapbook-prototype": "workspace:*",
     "next": "16.3.1",
     "react": "19.2.8",
     "react-dom": "19.2.8"

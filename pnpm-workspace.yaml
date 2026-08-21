@@ -1,6 +1,7 @@
 packages:
   - '.'
   - 'apps/*'
+  - 'packages/*'
 virtualStoreDir: '.pnpm'
 virtualStoreDirMaxLength: 40
 packageImportMethod: 'hardlink'

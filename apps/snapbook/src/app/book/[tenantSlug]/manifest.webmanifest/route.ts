@@ -1,4 +1,4 @@
-import { getTenantFixture, tenantFixtureParams } from "../../../../domain/fixtures.ts";
+import { getTenantFixture, tenantFixtureParams } from "@808/snapbook-prototype";
 import { buildTenantManifest } from "../../../../pwa/tenant-manifest.ts";
 
 export const dynamicParams = false;

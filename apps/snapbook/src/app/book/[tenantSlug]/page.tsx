@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { BookingExperience, getTenantFixture, tenantFixtureParams } from "@808/snapbook-prototype";
 
-import { BookingExperience } from "../../../components/booking-experience.tsx";
-import { getTenantFixture, tenantFixtureParams } from "../../../domain/fixtures.ts";
 
 export const dynamicParams = false;
 

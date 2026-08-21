@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
 import "./globals.css";
+import "@808/snapbook-prototype/styles.css";
 
 export const metadata: Metadata = {
   title: "SnapBook prototype",

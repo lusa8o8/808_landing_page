@@ -7,17 +7,18 @@ import {
   transitionBooking,
   type BookingEvent,
   type BookingState,
-} from "../domain/booking-machine.ts";
+} from "./domain/booking-machine.ts";
 import type {
   PricePresentation,
   SnapbookProvider,
   SnapbookService,
   SnapbookSlot,
   SnapbookTenant,
-} from "../domain/tenant-config.ts";
+} from "./domain/tenant-config.ts";
 
 type BookingExperienceProps = {
   mode: "embed" | "full";
+  showScenarioControls?: boolean;
   tenant: SnapbookTenant;
 };
 
@@ -383,7 +384,7 @@ function Journey({
   }
 }
 
-export function BookingExperience({ mode, tenant }: BookingExperienceProps) {
+export function BookingExperience({ mode, showScenarioControls = true, tenant }: BookingExperienceProps) {
   const initialState = useMemo(() => createInitialBookingState(tenant), [tenant]);
   const [state, setState] = useState(initialState);
 
@@ -416,17 +417,19 @@ export function BookingExperience({ mode, tenant }: BookingExperienceProps) {
           <span>Nothing is submitted or stored</span>
         </footer>
       </article>
-      <details className="scenario-panel">
-        <summary>Fixture scenarios</summary>
-        <p>Prototype controls for reviewing non-happy paths.</p>
-        <div className="scenario-actions">
-          <button onClick={() => dispatch({ type: "LOAD_SCENARIO", scenario: "returning" })} type="button">Returning</button>
-          <button onClick={() => dispatch({ type: "LOAD_SCENARIO", scenario: "unavailable" })} type="button">Unavailable</button>
-          <button onClick={() => dispatch({ type: "LOAD_SCENARIO", scenario: "conflict" })} type="button">Conflict</button>
-          <button onClick={() => dispatch({ type: "LOAD_SCENARIO", scenario: "failure" })} type="button">Failure</button>
-          <button onClick={() => dispatch({ type: "RESET" })} type="button">Reset</button>
-        </div>
-      </details>
+      {showScenarioControls ? (
+        <details className="scenario-panel">
+          <summary>Fixture scenarios</summary>
+          <p>Prototype controls for reviewing non-happy paths.</p>
+          <div className="scenario-actions">
+            <button onClick={() => dispatch({ type: "LOAD_SCENARIO", scenario: "returning" })} type="button">Returning</button>
+            <button onClick={() => dispatch({ type: "LOAD_SCENARIO", scenario: "unavailable" })} type="button">Unavailable</button>
+            <button onClick={() => dispatch({ type: "LOAD_SCENARIO", scenario: "conflict" })} type="button">Conflict</button>
+            <button onClick={() => dispatch({ type: "LOAD_SCENARIO", scenario: "failure" })} type="button">Failure</button>
+            <button onClick={() => dispatch({ type: "RESET" })} type="button">Reset</button>
+          </div>
+        </details>
+      ) : null}
     </main>
   );
 }

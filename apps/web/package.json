@@ -12,6 +12,7 @@
     "test": "node --test src/content-schema/common.test.ts src/lib/ltv-api.test.ts src/lib/seo.test.ts ../../supabase/functions/ltv-agent/abuse-control.test.ts"
   },
   "dependencies": {
+    "@808/snapbook-prototype": "workspace:*",
     "lucide-react": "0.487.0",
     "next": "16.3.1",
     "react": "19.2.8",

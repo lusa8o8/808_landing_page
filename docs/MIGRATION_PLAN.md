@@ -53,6 +53,7 @@ Each phase ends with:
 |   |-- admin/                     # Admin-subdomain Next.js application
 |   `-- snapbook/                  # Embed and customer PWA shells
 |-- packages/
+|   |-- snapbook-prototype/        # Current fixture-only journey shared by web and SnapBook
 |   |-- brand/                     # Tokens, fonts, logos, shared assets
 |   |-- contracts/                 # Runtime schemas and transport types
 |   |-- database/                  # Supabase types and client factories

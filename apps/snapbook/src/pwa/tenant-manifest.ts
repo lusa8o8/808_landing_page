@@ -1,4 +1,4 @@
-import type { SnapbookTenant } from "../domain/tenant-config.ts";
+import type { SnapbookTenant } from "@808/snapbook-prototype/tenant-config";
 
 export function buildTenantManifest(tenant: SnapbookTenant) {
   const startUrl = `/book/${tenant.slug}`;

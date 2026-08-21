@@ -1,6 +1,5 @@
 import Link from "next/link";
-
-import { tenantFixtures } from "../domain/fixtures.ts";
+import { tenantFixtures } from "@808/snapbook-prototype";
 
 export default function PrototypeIndex() {
   return (
