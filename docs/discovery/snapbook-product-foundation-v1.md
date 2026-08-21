@@ -27,14 +27,14 @@ Confidential strategy and client-journey material informed this discovery. Its q
 - The demo has a useful configuration boundary for business identity, theme, services, provider, prices, and time fixtures, but it deliberately has no network, persistence, identity, reminders, payments, calendar connection, or PWA behavior.
 - The approved product direction is a single shared multi-tenant booking service. The client-facing website remains independently handover-capable; the shared booking platform does not fork per client.
 - SnapBook inherits 808's accessible forest, ivory, and amber baseline. Tenant colours and identity may override the product theme without changing interaction order or accessibility requirements.
-- Public copy currently describes the standard flow as choosing a service and requesting a time. Instant confirmation is therefore a capability decision, not an assumption.
+- Public copy currently describes the standard flow as choosing services and requesting a time. Instant confirmation is therefore a capability decision, not an assumption.
 
 ## Product principles
 
 ### Frictionless first booking
 
 - Do not require an account, PWA installation, calendar view, provider decision, or long intake form before a customer can see useful availability.
-- Ask for contact details only after the customer has selected a service and viable time.
+- Ask for contact details only after the customer has selected one or more services and a viable time.
 - Prefer a short set of recommended slots. `See more dates` is the calendar escape hatch when suggestions do not work.
 - Preserve the customer's valid choices when a conditional screen, validation error, or recoverable conflict occurs.
 
@@ -56,7 +56,7 @@ Confidential strategy and client-journey material informed this discovery. Its q
 ### Minimal data
 
 - SnapBook does not ask for symptoms, medical history, case details, legal facts, free-form appointment reasons, or other sensitive context.
-- The standard booking record contains only what is necessary to identify the service, time, tenant, location/resource when applicable, booking state, and a minimal reply channel.
+- The standard booking record contains only what is necessary to identify the selected services, time, tenant, location/resource when applicable, booking state, and a minimal reply channel.
 - If additional context is required, the interface may direct the customer to an independently controlled business contact channel after the booking step. SnapBook must not imply that an external channel is appropriate for sensitive information without a separate compliance decision.
 
 ### Simple for customers, guarded operationally
@@ -100,7 +100,7 @@ Confidential strategy and client-journey material informed this discovery. Its q
 
 ### Customer
 
-Uses the embedded widget or full PWA to find a service and time, submit a booking request, view a result, and later manage or repeat a booking through authorized access.
+Uses the embedded widget or full PWA to choose one or more services and a time, submit a booking request, view a result, and later manage or repeat a booking through authorized access.
 
 ### Tenant operator
 
@@ -116,13 +116,13 @@ Provisions tenants, manages feature eligibility and safe theme configuration, ha
 
 ```text
 Tenant context
-  -> Choose service
+  -> Choose one or more services
   -> [Choose location, only if enabled later]
   -> [Choose provider, only if the customer opts out of any available]
   -> Suggested times
   -> [More dates, only when needed]
   -> Minimal contact details
-  -> Review service, time, price/status and policy
+  -> Review services, duration, time, price/status and policy
   -> Submit with idempotency key and slot hold
   -> Confirmed OR request received
 ```
@@ -130,12 +130,12 @@ Tenant context
 Screen requirements:
 
 1. **Tenant context** establishes the business name, location, brand, timezone context, and whether the customer is booking or sending a request. A tenant mismatch or disabled tenant fails before customer data is requested.
-2. **Service selection** shows only bookable services. Price wording must distinguish fixed price, starting price, quote required, or hidden price.
+2. **Service selection** shows only bookable services and allows customers to stack compatible services before continuing. Price wording must distinguish fixed price, starting price, quote required, or hidden price.
 3. **Provider selection** is skipped by default. `Any available` remains selected unless provider preference is enabled and deliberately chosen.
 4. **Suggested times** presents a small, ordered set of real server-generated options. The interface must not label a slot scarce, popular, or available unless that state is backed by current data.
 5. **More dates** provides a simple date browser only after suggested times fail the customer. It is not the entry screen.
 6. **Contact details** asks for the minimum approved reply channel. It must not contain a general notes field.
-7. **Review** states the service, location/resource if applicable, time, duration, displayed price meaning, booking mode, and relevant change policy before submission.
+7. **Review** states every selected service, location/resource if applicable, time, combined duration, displayed price meaning, booking mode, and relevant change policy before submission.
 8. **Result** distinguishes `confirmed` from `request received`. It gives the customer an authorized management path without claiming a reminder will be sent unless reminder delivery is operational.
 
 ### Journey B: returning customer
@@ -153,7 +153,7 @@ Signed management link or established first-party session
 - PWA installation is offered after value has been delivered, never as a prerequisite.
 - A remembered browser can reduce repeated entry, but browser storage is not authoritative customer identity.
 - Third-party iframe cookie restrictions mean the embed must not depend on silent cross-site recognition. The full-page PWA or a signed management link is the reliable return path.
-- `Book again` preselects the prior service and, only when still valid, the prior location/provider preference. It never reuses an old time.
+- `Book again` preselects the prior service stack and, only when still valid, the prior location/provider preference. It never reuses an old time.
 
 ### Journey C: reschedule
 
@@ -191,7 +191,7 @@ Authorized booking access
 
 - Show the next useful date range when one exists.
 - Offer `See more dates` and a direct business contact path.
-- Preserve the chosen service and provider preference.
+- Preserve the chosen services and provider preference.
 - Do not invent a waitlist, overbook, or collect contact details for a feature that is not operational.
 
 ### Journey F: conflict, failure, and offline behavior

@@ -32,6 +32,23 @@ function findService(tenant: SnapbookTenant, id: string | null): SnapbookService
   return tenant.services.find((service) => service.id === id);
 }
 
+function findServices(tenant: SnapbookTenant, ids: readonly string[]): SnapbookService[] {
+  const selected = new Set(ids);
+  return tenant.services.filter((service) => selected.has(service.id));
+}
+
+function serviceStackPrice(services: readonly SnapbookService[]): string | null {
+  if (services.length === 0 || services.some((service) => service.price.kind === "hidden")) return null;
+  if (services.some((service) => service.price.kind === "quote")) return "Price confirmed after review";
+
+  const amount = services.reduce(
+    (total, service) => total + (service.price.kind === "fixed" || service.price.kind === "from" ? service.price.amount : 0),
+    0,
+  );
+  const prefix = services.some((service) => service.price.kind === "from") ? "From " : "";
+  return `${prefix}K${amount.toLocaleString("en-ZM")}`;
+}
+
 function findProvider(tenant: SnapbookTenant, id: string | null): SnapbookProvider | undefined {
   return tenant.providers.find((provider) => provider.id === id);
 }
@@ -56,16 +73,23 @@ function ChoiceButton({
   children,
   detail,
   onClick,
+  selected,
 }: {
   children: React.ReactNode;
   detail?: string | null;
   onClick: () => void;
+  selected?: boolean;
 }) {
   return (
-    <button className="choice-button" onClick={onClick} type="button">
+    <button
+      aria-pressed={selected}
+      className={`choice-button${selected ? " choice-button--selected" : ""}`}
+      onClick={onClick}
+      type="button"
+    >
       <span>{children}</span>
       {detail ? <small>{detail}</small> : null}
-      <span aria-hidden="true" className="choice-arrow">→</span>
+      <span aria-hidden="true" className="choice-arrow">{selected ? "✓" : "→"}</span>
     </button>
   );
 }
@@ -98,19 +122,31 @@ function SlotGrid({
 }
 
 function Summary({ state, tenant }: { state: BookingState; tenant: SnapbookTenant }) {
-  const service = findService(tenant, state.serviceId);
+  const services = findServices(tenant, state.serviceIds);
   const provider = findProvider(tenant, state.providerId);
   const slot = findSlot(tenant, state.slotId);
+  const totalMinutes = services.reduce((total, service) => total + service.durationMinutes, 0);
+  const stackPrice = serviceStackPrice(services);
 
   return (
     <dl className="summary-list">
-      <div><dt>Service</dt><dd>{service?.name ?? "Not selected"}</dd></div>
+      <div>
+        <dt>{services.length === 1 ? "Service" : "Services"}</dt>
+        <dd>
+          {services.length > 0 ? (
+            <ul className="summary-services">
+              {services.map((service) => <li key={service.id}>{service.name}</li>)}
+            </ul>
+          ) : "Not selected"}
+        </dd>
+      </div>
+      <div><dt>Duration</dt><dd>{totalMinutes} min</dd></div>
       {tenant.capabilities.providerPreference ? (
-        <div><dt>Provider</dt><dd>{provider?.name ?? "First available"}</dd></div>
+        <div><dt>Provider</dt><dd>{provider?.name ?? "No preference"}</dd></div>
       ) : null}
       <div><dt>Time</dt><dd>{slot ? `${slot.dayLabel}, ${slot.timeLabel}` : "Not selected"}</dd></div>
-      {service && priceLabel(service.price) ? (
-        <div><dt>Price</dt><dd>{priceLabel(service.price)}</dd></div>
+      {stackPrice ? (
+        <div><dt>Price</dt><dd>{stackPrice}</dd></div>
       ) : null}
     </dl>
   );
@@ -125,6 +161,9 @@ function Journey({
   state: BookingState;
   tenant: SnapbookTenant;
 }) {
+  const selectedServices = findServices(tenant, state.serviceIds);
+  const selectedMinutes = selectedServices.reduce((total, service) => total + service.durationMinutes, 0);
+  const selectedPrice = serviceStackPrice(selectedServices);
   const upcomingService = findService(tenant, tenant.upcoming.serviceId);
   const upcomingProvider = findProvider(tenant, tenant.upcoming.providerId ?? null);
   const upcomingSlot = findSlot(tenant, state.upcomingSlotId);
@@ -135,30 +174,57 @@ function Journey({
         <section aria-labelledby="service-heading">
           <p className="step-label">Choose a service</p>
           <h2 id="service-heading">What do you need?</h2>
-          <p className="supporting-copy">Start with the service. Times come next.</p>
+          <p className="supporting-copy">Choose one service or stack a few together. Times come next.</p>
           <div className="choice-stack">
-            {tenant.services.map((item) => (
-              <ChoiceButton
-                detail={`${item.durationMinutes} min${priceLabel(item.price) ? ` · ${priceLabel(item.price)}` : ""}`}
-                key={item.id}
-                onClick={() => dispatch({ type: "SELECT_SERVICE", serviceId: item.id })}
-              >
-                <strong>{item.name}</strong>
-                <span className="choice-description">{item.description}</span>
-              </ChoiceButton>
-            ))}
+            {tenant.services.map((item) => {
+              const selected = state.serviceIds.includes(item.id);
+              return (
+                <ChoiceButton
+                  detail={`${item.durationMinutes} min${priceLabel(item.price) ? ` · ${priceLabel(item.price)}` : ""}`}
+                  key={item.id}
+                  onClick={() => dispatch({ type: "TOGGLE_SERVICE", serviceId: item.id })}
+                  selected={selected}
+                >
+                  <strong>{item.name}</strong>
+                  <span className="choice-description">{item.description}</span>
+                </ChoiceButton>
+              );
+            })}
           </div>
+          <div className="selection-bar" aria-live="polite">
+            <span>
+              {selectedServices.length === 0
+                ? "Choose at least one service"
+                : `${selectedServices.length} ${selectedServices.length === 1 ? "service" : "services"} · ${selectedMinutes} min`}
+            </span>
+            {selectedPrice ? <strong>{selectedPrice}</strong> : null}
+          </div>
+          <button
+            className="primary-button full-width"
+            disabled={selectedServices.length === 0}
+            onClick={() => dispatch({ type: "CONTINUE_SERVICES" })}
+            type="button"
+          >
+            Continue
+          </button>
         </section>
       );
     case "provider": {
-      const providers = tenant.providers.filter((provider) => provider.serviceIds.includes(state.serviceId ?? ""));
+      const providers = tenant.providers.filter((provider) =>
+        state.serviceIds.every((serviceId) => provider.serviceIds.includes(serviceId)),
+      );
       return (
         <section aria-labelledby="provider-heading">
           <BackButton dispatch={dispatch} />
           <p className="step-label">Choose a provider</p>
           <h2 id="provider-heading">Do you have a preference?</h2>
+          <p className="supporting-copy">
+            {providers.length > 0
+              ? "Only providers who can handle your full service stack are shown."
+              : "No single provider covers the full stack. Choose no preference and the business can arrange it."}
+          </p>
           <div className="choice-stack">
-            <ChoiceButton onClick={() => dispatch({ type: "SELECT_ANY_PROVIDER" })}>First available</ChoiceButton>
+            <ChoiceButton onClick={() => dispatch({ type: "SELECT_ANY_PROVIDER" })}>No preference</ChoiceButton>
             {providers.map((provider) => (
               <ChoiceButton key={provider.id} onClick={() => dispatch({ type: "SELECT_PROVIDER", providerId: provider.id })}>
                 {provider.name}

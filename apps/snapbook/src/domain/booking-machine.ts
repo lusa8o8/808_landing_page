@@ -23,7 +23,7 @@ export type BookingState = {
   outcome: BookingOutcome;
   providerId: "any" | string | null;
   replacementSlotId: string | null;
-  serviceId: string | null;
+  serviceIds: readonly string[];
   slotId: string | null;
   slotSource: SlotSource;
   step: BookingStep;
@@ -31,7 +31,8 @@ export type BookingState = {
 };
 
 export type BookingEvent =
-  | { type: "SELECT_SERVICE"; serviceId: string }
+  | { type: "TOGGLE_SERVICE"; serviceId: string }
+  | { type: "CONTINUE_SERVICES" }
   | { type: "SELECT_PROVIDER"; providerId: string }
   | { type: "SELECT_ANY_PROVIDER" }
   | { type: "SELECT_SLOT"; slotId: string }
@@ -53,7 +54,7 @@ export type BookingEvent =
 export function createInitialBookingState(tenant: SnapbookTenant): BookingState {
   return {
     step: "services",
-    serviceId: null,
+    serviceIds: [],
     providerId: tenant.capabilities.providerPreference ? null : "any",
     slotId: null,
     slotSource: null,
@@ -77,8 +78,12 @@ function assertService(tenant: SnapbookTenant, serviceId: string): void {
 
 function assertProvider(tenant: SnapbookTenant, state: BookingState, providerId: string): void {
   const provider = tenant.providers.find((candidate) => candidate.id === providerId);
-  if (!provider || !state.serviceId || !provider.serviceIds.includes(state.serviceId)) {
-    throw new Error(`Provider ${providerId} cannot serve the selected service`);
+  if (
+    !provider ||
+    state.serviceIds.length === 0 ||
+    !state.serviceIds.every((serviceId) => provider.serviceIds.includes(serviceId))
+  ) {
+    throw new Error(`Provider ${providerId} cannot serve the selected service stack`);
   }
 }
 
@@ -89,7 +94,7 @@ function fixtureScenario(tenant: SnapbookTenant, scenario: "returning" | "unavai
     return {
       ...base,
       step: "returning",
-      serviceId: tenant.usualServiceId,
+      serviceIds: [tenant.usualServiceId],
       providerId: "any",
     };
   }
@@ -97,7 +102,7 @@ function fixtureScenario(tenant: SnapbookTenant, scenario: "returning" | "unavai
   return {
     ...base,
     step: scenario,
-    serviceId: tenant.usualServiceId,
+    serviceIds: [tenant.usualServiceId],
     providerId: "any",
     slotId: scenario === "conflict" || scenario === "failure" ? tenant.suggestedSlots[0]?.id ?? null : null,
     slotSource: scenario === "conflict" || scenario === "failure" ? "suggested" : null,
@@ -110,17 +115,34 @@ export function transitionBooking(
   tenant: SnapbookTenant,
 ): BookingState {
   switch (event.type) {
-    case "SELECT_SERVICE": {
+    case "TOGGLE_SERVICE": {
       assertStep(state, event, "services");
       assertService(tenant, event.serviceId);
+
+      const selected = new Set(state.serviceIds);
+      if (selected.has(event.serviceId)) selected.delete(event.serviceId);
+      else selected.add(event.serviceId);
+
       return {
         ...state,
-        step: tenant.capabilities.providerPreference ? "provider" : "times",
-        serviceId: event.serviceId,
+        serviceIds: tenant.services
+          .map((service) => service.id)
+          .filter((serviceId) => selected.has(serviceId)),
         providerId: tenant.capabilities.providerPreference ? null : "any",
         slotId: null,
         slotSource: null,
         outcome: null,
+      };
+    }
+    case "CONTINUE_SERVICES": {
+      assertStep(state, event, "services");
+      if (state.serviceIds.length === 0) {
+        throw new Error("At least one service must be selected");
+      }
+      return {
+        ...state,
+        step: tenant.capabilities.providerPreference ? "provider" : "times",
+        providerId: tenant.capabilities.providerPreference ? null : "any",
       };
     }
     case "SELECT_PROVIDER": {
@@ -166,7 +188,7 @@ export function transitionBooking(
       return {
         ...state,
         step: "times",
-        serviceId: tenant.usualServiceId,
+        serviceIds: [tenant.usualServiceId],
         providerId: "any",
         slotId: null,
         slotSource: null,
@@ -212,12 +234,11 @@ export function transitionBooking(
         : { ...state, step: "review" };
     }
     case "BACK": {
-      if (state.step === "provider") return { ...state, step: "services", serviceId: null };
+      if (state.step === "provider") return { ...state, step: "services", providerId: null };
       if (state.step === "times") {
         return {
           ...state,
           step: tenant.capabilities.providerPreference ? "provider" : "services",
-          ...(tenant.capabilities.providerPreference ? {} : { serviceId: null }),
         };
       }
       if (state.step === "more-dates") return { ...state, step: "times" };

@@ -69,10 +69,13 @@ button:focus-visible, a:focus-visible, summary:focus-visible {
 .choice-stack { display: grid; gap: 10px; margin-top: 24px; }
 .choice-button { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 16px; width: 100%; padding: 17px 16px; border: 1px solid #d8d7d0; border-radius: 14px; background: #fff; text-align: left; cursor: pointer; transition: transform .15s ease, border-color .15s ease; }
 .choice-button:hover { transform: translateY(-1px); border-color: var(--snap-accent); }
+.choice-button--selected { border-color: var(--snap-accent); background: color-mix(in srgb, var(--snap-signal) 14%, #fff); }
 .choice-button > span:first-child { display: grid; gap: 4px; }
 .choice-description { color: #686b65; font-size: .82rem; line-height: 1.35; }
 .choice-button small { grid-column: 1; color: #73766f; }
 .choice-arrow { grid-column: 2; grid-row: 1 / span 2; color: var(--snap-accent); font-size: 1.2rem; }
+.selection-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; padding: 12px 4px 2px; color: #676b65; font-size: .82rem; }
+.selection-bar strong { color: var(--snap-accent); white-space: nowrap; }
 .text-button { padding: 0; border: 0; background: transparent; color: var(--snap-accent); font-weight: 750; cursor: pointer; }
 section > .text-button:first-child { margin-bottom: 24px; }
 .slot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 24px 0 16px; }
@@ -91,6 +94,7 @@ section > .text-button:first-child { margin-bottom: 24px; }
 .summary-list div { display: flex; justify-content: space-between; gap: 18px; padding: 14px 0; border-bottom: 1px solid #deddd6; }
 .summary-list dt { color: #73766f; }
 .summary-list dd { margin: 0; font-weight: 750; text-align: right; }
+.summary-services { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; }
 .fine-print { margin: 12px 12px 0; color: #757871; font-size: .75rem; line-height: 1.45; text-align: center; }
 .centred-state { padding-top: 28px; text-align: center; }
 .centred-state .primary-button, .centred-state .secondary-button { margin-top: 12px; }

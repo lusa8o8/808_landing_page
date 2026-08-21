@@ -57,7 +57,7 @@ Primary references:
 
 - Add a runtime-validated tenant configuration model.
 - Add one pure booking transition function with explicit events and impossible-transition rejection.
-- Support services, optional provider choice, suggested slots, later dates, a skipped contact-value screen, review, request received, returning home, book again, rescheduling, cancellation, no availability, conflict, failure, retry, back, and reset.
+- Support multi-service stacking, optional provider choice, suggested slots, later dates, a skipped contact-value screen, review, request received, returning home, book again, rescheduling, cancellation, no availability, conflict, failure, retry, back, and reset.
 - Keep the domain module inside `apps/snapbook` until a server or admin consumer justifies a workspace package and the S1 state contract has passed review.
 
 ### Fixtures
@@ -69,7 +69,7 @@ Primary references:
 
 ### Interface
 
-- Keep the first screen focused on services.
+- Keep the first screen focused on services, allow add/remove stacking, and require an explicit Continue action.
 - Show a small set of suggested times before `See more dates`.
 - Render provider preference only when configured.
 - Explain the future minimal-contact step without presenting editable contact fields.
@@ -124,12 +124,12 @@ Primary references:
 
 S1 now ships one runtime-validated configuration model and one pure transition function through both route shells. The two fictional tenants prove that provider choice, pricing presentation, palette, services, and slots are configuration—not separate industry applications. The full-page route advertises a tenant-specific manifest identity; the embed route uses the same component without advertising installation.
 
-The prototype begins with service selection and offers only a few suggested times before later dates. It includes the first-time request preview, a deliberately empty contact-value step, returning home, book again, reschedule, cancel, unavailable, conflict, failure, retry, back, and reset paths. Fixture scenario controls remain visibly labelled and separate from customer actions.
+The prototype begins with multi-service selection and an explicit Continue action, then offers only a few suggested times before later dates. It includes the first-time request preview, a deliberately empty contact-value step, returning home, book again, reschedule, cancel, unavailable, conflict, failure, retry, back, and reset paths. Fixture scenario controls remain visibly labelled and separate from customer actions.
 
 ### Verification evidence
 
-- SnapBook unit tests: 17 passed.
-- Repository tests: 36 passed in total; 19 existing web tests, 0 admin tests, and 17 SnapBook tests.
+- SnapBook unit tests: 20 passed.
+- Repository tests: 39 passed in total; 19 existing web tests, 0 admin tests, and 20 SnapBook tests.
 - Repository lint and type-check: passed with no warnings.
 - Full production build: passed for web, admin, SnapBook, and legacy web.
 - Generated SnapBook output: index and not-found, two full-page routes, two embed routes, and two tenant manifest routes.
@@ -148,3 +148,9 @@ The prototype begins with service selection and offers only a few suggested time
 ### Exact S2 boundary
 
 Begin S2 with fresh discovery of real booking-domain invariants. Define tenant, location, service, provider, availability rule, slot, customer, booking request, appointment, and lifecycle-event contracts before selecting database tables or API handlers. Add the smallest persistence seam behind the existing transition vocabulary; keep fixture mode available for product review and tests. Do not add production embedding, admin operations, reminders, payments, health-data collection, or a broad calendar UI during S2.
+
+### S1 interaction amendment: multi-service stacking
+
+Approved on 2026-08-21 after the first fixture review. The service screen now toggles services into a visible stack and advances only through an explicit Continue button. Continue remains unavailable while the stack is empty. The interface shows selected count, combined duration, and a combined price only when the tenant's price presentations make that statement honest.
+
+For provider-enabled tenants, named providers are shown only when they can perform every selected service. `No preference` remains available because a real operator may need to allocate a mixed stack across resources; S1 does not pretend to schedule that allocation. Back navigation preserves the stack for editing. This amendment changes the prototype contract that S2 must model: availability and transactional holds will need to account for an ordered service stack and combined duration rather than one service identifier.
