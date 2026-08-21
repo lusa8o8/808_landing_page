@@ -303,3 +303,85 @@ Still required before implementation sign-off:
 ## Phase 3 discovery sign-off condition
 
 Discovery is complete when the owner confirms email routing and response expectations, supplies the remaining company facts, chooses the form delivery path, and approves the indexing checkpoint. Implementation can then proceed without inventing business facts or publishing thin pages.
+
+## 2026-08-21 discovery amendment: SEO foundation and indexing release gate
+
+This amendment replaces the stale SEO assumptions above with a fresh repository and production inspection at commit `44f63a3`. It prepares the next implementation slice but does not authorize search indexing.
+
+### Current launch surface
+
+The public application now has a complete, statically generated six-route launch set:
+
+```text
+/
+/calculator
+/services
+/services/service-and-pricing-pages
+/services/booking-systems
+/services/local-search-and-maps
+```
+
+The branded not-found and error experiences are operational but are not indexable routes. `/about`, `/contact`, industry routes, case studies, and a blog remain intentionally deferred. Publishing them without distinct facts, evidence, or an operating need would create avoidable work and thin content.
+
+The earlier route matrix and sign-off condition are therefore historical context rather than current blockers. Direct WhatsApp and email contact are already available, and Phase 3 does not depend on a contact form or About page.
+
+### Source and live-domain findings
+
+- `apps/web` is on Next.js 16.3.1 and uses the App Router Metadata API.
+- The root layout still hard-codes `noindex, nofollow` for every environment. This remains the primary protection against accidental indexing.
+- The home page has a title and description but no explicit canonical URL. The calculator, services index, and service detail routes already declare canonical paths.
+- There is no `app/robots.ts`, `app/sitemap.ts`, Open Graph or Twitter share image, complete social metadata, or JSON-LD.
+- The site configuration correctly identifies `https://www.eightzeroeight.online` as the canonical production origin.
+- On 2026-08-21, `https://www.eightzeroeight.online/` returned `200` with `noindex, nofollow`; `/robots.txt` and `/sitemap.xml` returned `404`.
+- `https://eightzeroeight.online/` correctly returned a permanent redirect to the `www` origin.
+- `https://808-landing-page-web.vercel.app/` still returned the production page directly. Canonical metadata will reduce ambiguity, but a host-level permanent redirect to the custom domain is the stronger canonical signal and should be configured in Vercel if the platform permits it.
+- No `X-Robots-Tag` was observed on the public HTML response. The current HTML meta directive is sufficient for the page, but downloadable non-HTML assets are outside this launch slice.
+
+### Evidence-based constraints
+
+- Google does not support `noindex` in `robots.txt`. A crawler must be allowed to fetch a page to observe its HTML `noindex` directive. The application metadata remains the indexing control; `robots.txt` is a crawl-preference and discovery file, not a confidentiality boundary.
+- Canonical redirects, HTML canonical annotations, and sitemap inclusion are complementary signals. Only canonical `www` URLs should appear in the sitemap.
+- A sitemap is a discovery hint, not an indexing guarantee. It should list only the six approved public routes.
+- Structured data must describe visible, verified page content. This site does not yet have an approved public street address, logo asset, opening hours, reviews, or client evidence, so none may be invented for markup.
+- Cloudflare's managed `robots.txt` can prepend AI-crawler directives to the application's file. Its dashboard policy and the final served file must be reviewed together. `robots.txt` compliance is voluntary; Cloudflare AI Crawl Control or another enforcement rule is required when blocking must be enforced.
+
+Primary references:
+
+- [Next.js metadata and Open Graph images](https://nextjs.org/docs/app/getting-started/metadata-and-og-images)
+- [Next.js sitemap convention](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap)
+- [Google: block indexing with `noindex`](https://developers.google.com/search/docs/crawling-indexing/block-indexing)
+- [Google: canonical URL signals](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls)
+- [Google: build and submit a sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)
+- [Google: Organization structured data](https://developers.google.com/search/docs/appearance/structured-data/organization)
+- [Cloudflare managed `robots.txt`](https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/)
+- [Cloudflare AI Crawl Control](https://developers.cloudflare.com/ai-crawl-control/)
+
+### Proposed implementation design
+
+1. Add one server/build-time policy flag, `SITE_INDEXING_ENABLED`, with a fail-closed default. Only the Vercel Production environment may eventually set it to `true`; Preview and Development must leave it unset or `false`.
+2. Centralize the policy so root metadata and `robots.ts` cannot drift. A false policy emits `noindex, nofollow` and a crawl restriction; a true policy emits index/follow metadata and permits crawling of the public surface.
+3. Add an explicit home canonical and complete inherited Open Graph and Twitter metadata using the canonical origin, public brand name, current description, and `en_ZM` locale.
+4. Add a brand-native 1200x630 generated Open Graph image using the approved colour and typography direction. It must not introduce an unapproved logo, testimonial, client claim, or offer.
+5. Add `sitemap.ts` with only the six approved canonical URLs. Avoid synthetic `lastModified` values and speculative priorities; add dates later only when backed by content records.
+6. Add a minimal home-page `Organization` JSON-LD object using only public facts already visible on the site: name, canonical URL, email, telephone, and Lusaka service area. Do not use `LocalBusiness`, a street address, opening hours, reviews, ratings, or a logo until those facts and assets are approved. Sanitize serialized JSON-LD as required by the Next.js guidance.
+7. Cover both policy states and the exact sitemap allowlist with deterministic tests. The build must continue to statically generate the public pages and metadata routes.
+8. Keep `SITE_INDEXING_ENABLED=false` through code review, local verification, deployment, custom-domain verification, share-card inspection, structured-data validation, and the Cloudflare crawler-policy review.
+
+### Release gate for enabling indexing
+
+Indexing can be enabled only after all of the following pass on the deployed custom domain:
+
+- The six public pages return `200`, contain self-referencing canonical URLs on the `www` origin, and have unique titles and descriptions.
+- `/robots.txt` and `/sitemap.xml` return valid content and reference only the canonical origin.
+- Preview deployments remain `noindex, nofollow` and do not advertise a public sitemap.
+- The apex redirects to `www`; the Vercel production alias is configured to redirect to the canonical domain or is otherwise verified not to compete as an indexable host.
+- Open Graph/Twitter output renders correctly when shared and contains no unsupported claims.
+- JSON-LD passes syntax and rich-result validation and matches visible public facts.
+- Cloudflare's final served `robots.txt` and crawler controls preserve ordinary search discovery while applying the owner's separate choices for AI search, agent access, and model training.
+- The owner explicitly approves changing only the Vercel Production `SITE_INDEXING_ENABLED` value to `true`.
+
+After enablement, verify the live meta directives, robots file, sitemap, canonical redirects, and all six routes again. Google Search Console property verification and sitemap submission are the operational handoff; they are not prerequisites for building the foundation.
+
+### Next implementation slice
+
+Implement the environment-safe metadata foundation, generated share image, robots route, sitemap route, minimal verified Organization JSON-LD, and regression tests as one cohesive SEO-foundation change. Deploy it in the fail-closed state. Enabling indexing remains a separate configuration change and explicit sign-off checkpoint.
