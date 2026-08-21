@@ -5,7 +5,7 @@ import { LtvChat } from "@/components/ltv-chat";
 export const metadata: Metadata = {
   title: "Annual client value calculator",
   description:
-    "Estimate annual client value from average spend and repeat visits, then use the result to assess customer-booking friction.",
+    "Estimate what one returning customer may be worth each year using average spend and repeat visits.",
   alternates: {
     canonical: "/calculator",
   },
@@ -29,8 +29,8 @@ export default function CalculatorPage() {
             Start with one customer.
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-            Describe your business, typical customer spend, and repeat visits. The calculator will
-            organize the numbers and show the annual value clearly.
+            Tell us what a customer usually spends and how often they return. The calculator will
+            estimate what that customer may be worth in one year.
           </p>
           <div className="mt-9 text-left">
             <LtvChat />
@@ -55,20 +55,24 @@ export default function CalculatorPage() {
               <p className="font-heading text-xs font-medium uppercase tracking-[0.18em] text-primary">
                 02 · The calculation
               </p>
-              <h2 className="mt-3 font-heading text-xl font-medium">A transparent formula</h2>
+              <h2 className="mt-3 font-heading text-xl font-medium">
+                Average spend × visits per year
+              </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Annual client value is the average spend per visit multiplied by annual visit
-                frequency. The multiplication is performed deterministically.
+                The calculator multiplies the average amount spent on each visit by the number of
+                visits in one year.
               </p>
             </article>
             <article>
               <p className="font-heading text-xs font-medium uppercase tracking-[0.18em] text-primary">
                 03 · The decision
               </p>
-              <h2 className="mt-3 font-heading text-xl font-medium">A starting point, not a promise</h2>
+              <h2 className="mt-3 font-heading text-xl font-medium">
+                An estimate, not promised revenue
+              </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Use the result to frame a conversation about booking and discovery friction. It is a
-                planning estimate, not a revenue guarantee.
+                Use the result to see what one returning customer may be worth. It does not tell you
+                how many customers a website will bring.
               </p>
             </article>
           </div>

@@ -164,15 +164,15 @@ export function SnapbookDemo() {
           <ul className="space-y-4 text-sm text-foreground/75">
             <li className="flex gap-3">
               <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-strong" />
-              One clear service and time-selection path
+              Customers choose a service and time in one place
             </li>
             <li className="flex gap-3">
               <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-strong" />
-              A reusable return experience for repeat customers
+              Repeat customers can book again with fewer steps
             </li>
             <li className="flex gap-3">
               <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent-strong" />
-              Client branding without redesigning the workflow
+              Colours and business details can match your brand
             </li>
           </ul>
         </div>
@@ -299,10 +299,12 @@ export function SnapbookDemo() {
               <div className="flex flex-1 flex-col">
                 <BackButton label="Times" onClick={() => setScreen("times")} />
                 <div className="mt-7">
-                  <h3 className="font-heading text-3xl font-medium text-foreground">Review the flow</h3>
+                  <h3 className="font-heading text-3xl font-medium text-foreground">
+                    Check the details
+                  </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    A live setup would request only the client-approved contact details needed to
-                    confirm this service. This demo skips them entirely.
+                    A live booking page would ask only for the contact details your business needs
+                    to confirm the appointment. This demo skips them entirely.
                   </p>
                 </div>
                 <div className="mt-7 overflow-hidden rounded-2xl border border-black/8 bg-white">
@@ -389,7 +391,7 @@ export function SnapbookDemo() {
                     onClick={bookUsual}
                     className="mt-5 w-full rounded-xl bg-[var(--snap-signal)] px-4 py-3 text-sm font-medium text-[var(--snap-accent)] hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
-                    Preview book again
+                    Book again
                   </button>
                 </div>
                 <div className="mt-5 rounded-2xl border border-black/8 bg-white p-5">
@@ -431,9 +433,11 @@ export function SnapbookDemo() {
               <div className="flex flex-1 flex-col">
                 <BackButton label="Upcoming" onClick={() => setScreen("returning")} />
                 <div className="mt-7">
-                  <h3 className="font-heading text-3xl font-medium text-foreground">Move the demo</h3>
+                  <h3 className="font-heading text-3xl font-medium text-foreground">
+                    Choose a new demo time
+                  </h3>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    Current fixture: {upcomingSlot.day}, {upcomingSlot.time}
+                    Current demo time: {upcomingSlot.day}, {upcomingSlot.time}
                   </p>
                 </div>
                 <div className="mt-6 space-y-3">
@@ -463,7 +467,7 @@ export function SnapbookDemo() {
                   })}
                 </div>
                 <div className="mt-auto space-y-3 pt-8">
-                  <PrimaryButton onClick={confirmMove}>Preview move</PrimaryButton>
+                  <PrimaryButton onClick={confirmMove}>Move demo appointment</PrimaryButton>
                   <button
                     type="button"
                     onClick={() => setScreen("returning")}

@@ -20,7 +20,7 @@ function formatKwacha(value: number) {
 }
 
 function ResultCard({ estimate }: { estimate: LtvEstimate }) {
-  const whatsappText = `Hi 808 Digital Systems — I run a ${estimate.businessType} and my estimated annual client value is ${formatKwacha(estimate.total)}. I’d love to talk about capturing this.`;
+  const whatsappText = `Hi 808 Digital Systems — I run a ${estimate.businessType} and my estimated annual client value is ${formatKwacha(estimate.total)}. I’d like to talk about making my business easier to find and book.`;
   const whatsappLink = `${siteConfig.whatsappHref}?text=${encodeURIComponent(whatsappText)}`;
 
   return (
@@ -59,7 +59,7 @@ function ResultCard({ estimate }: { estimate: LtvEstimate }) {
         href="/#contact"
         className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-primary transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:opacity-75"
       >
-        Talk to us about capturing this {formatKwacha(estimate.total)} / yr
+        Talk to us about making your business easier to find and book
         <ArrowRight aria-hidden="true" className="size-4 shrink-0" />
       </Link>
 
@@ -70,7 +70,7 @@ function ResultCard({ estimate }: { estimate: LtvEstimate }) {
           rel="noopener noreferrer"
           className="text-xs text-muted-foreground underline decoration-muted-foreground/40 underline-offset-2 transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
-          Not ready yet? Get this sent to your WhatsApp
+          Send this estimate to your WhatsApp
         </a>
       </p>
     </article>
