@@ -268,3 +268,42 @@ Error and not-found pages are already direct and require no planned rewrite. Con
 - SnapBook remains clearly illustrative and does not collect or submit data.
 - Existing URLs, metadata structure, contact destinations and interactive behavior remain stable.
 - All automated and manual verification in Slice 4 passes before the phase is signed off.
+
+## Implementation handoff
+
+- Implemented: 2026-08-21
+- Homepage copy commit: `d9a0c5b`
+- Service-page copy commit: `c180b2c`
+- Calculator and SnapBook copy commit: `7e44e63`
+
+### Delivered
+
+- Added one quiet line explaining that the calculator asks three short questions and estimates one returning client's annual value.
+- Rewrote the home-page path, service summaries, trust-bar descriptions, process and footer using find, call, message, book, services, prices, hours, location and contact details.
+- Kept the trust bar in its existing position and left the hero, section order and commercial sentence structurally unchanged.
+- Rewrote all three service records, the services index and the shared service-page labels in concrete owner language.
+- Preserved the included SnapBook statement, K12,000 starting price, first-365-days terms, payment ownership, regulated-record boundary and no-ranking-guarantee language.
+- Rewrote the calculator explanation so it states the inputs, multiplication and limits directly.
+- Replaced the result-card phrase `capturing this` with a direct invitation to discuss making the business easier to find and book.
+- Simplified SnapBook's supporting bullets, review message, repeat-booking button and rescheduling labels without changing the demo state machine.
+- Did not change the LTV prompt, API contract, arithmetic, routes, content schema, dependencies or public contact destinations.
+
+### Verification
+
+Passed:
+
+- 14 web and abuse-control tests.
+- Web lint.
+- Web type-check.
+- Production web build.
+- Static generation of the home page, calculator, services index and all three service routes.
+- Rendered HTML checks for section order, service-card order, K12,000 starting price, first-year inclusion, SnapBook demo disclaimer, email and WhatsApp destinations.
+- Rendered boundary checks for Google ranking, customer-payment ownership and regulated records.
+- Rendered prohibited-claim checks covering invented proof, response-time promises, conflicting pricing, guaranteed bookings and free-forever language.
+- Targeted rendered jargon checks for the phrases identified during discovery.
+- Local HTTP smoke checks returned `200` for all six public routes.
+- The running local page contained the updated home-page path, commercial statement, SnapBook introduction and launch wording.
+
+The terms `routine maintenance`, `payment account`, `regulated records`, `Booking systems`, and `Local search and maps` remain intentionally where commercial or technical precision requires them.
+
+Automated browser viewport capture was unavailable in the current tool runtime. No layout hierarchy or interaction was changed, but mobile and desktop text wrapping should receive a final human smoke check on the Vercel deployment before this copy pass is treated as visually signed off.
