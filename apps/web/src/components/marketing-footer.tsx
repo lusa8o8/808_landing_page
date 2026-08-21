@@ -11,7 +11,7 @@ export function MarketingFooter() {
         </h2>
 
         <p className="text-sm leading-relaxed text-white/60 sm:text-base">
-          We’ll start with the numbers, then recommend the right scope.
+          We’ll start with the numbers, then tell you what we think is worth building.
         </p>
 
         <a

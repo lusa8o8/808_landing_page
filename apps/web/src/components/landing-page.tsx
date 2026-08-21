@@ -10,17 +10,17 @@ const customerPath = [
   {
     number: "01",
     heading: "Be found",
-    body: "Give nearby customers accurate information when they search for what you do.",
+    body: "Show the right services, hours, location and contact details when nearby customers search.",
   },
   {
     number: "02",
     heading: "Be understood",
-    body: "Make your services, pricing approach, location, and next step easy to understand.",
+    body: "Put your services, prices or quote process, and location in one easy place.",
   },
   {
     number: "03",
     heading: "Be contacted or booked",
-    body: "Give an interested customer one clear path to act without chasing scattered details.",
+    body: "Let customers book, call or message you without hunting through old posts.",
   },
 ] as const;
 
@@ -73,6 +73,9 @@ function HeroSection() {
 
         <div className="mx-auto w-full max-w-2xl">
           <LtvChat />
+          <p className="mt-4 text-center text-xs leading-relaxed text-white/45">
+            Answer three short questions to estimate what one returning client is worth each year.
+          </p>
         </div>
       </div>
 
@@ -88,13 +91,13 @@ function CustomerPathSection() {
     <section className="bg-background px-4 py-24">
       <div className="mx-auto max-w-4xl">
         <div className="mx-auto mb-14 max-w-2xl space-y-5 text-center">
-          <SectionLabel>From value to action</SectionLabel>
+          <SectionLabel>How customers reach you</SectionLabel>
           <h2 className="font-heading text-3xl font-medium leading-[1.12] tracking-tight text-foreground sm:text-[44px]">
-            A valuable client still needs a clear path to your business.
+            Make it easy for customers to find you, understand your services and get in touch.
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Your website should help the right customer find you, understand your offer, and take
-            the next step.
+            Your website should answer the questions customers ask before they call, message or
+            book.
           </p>
         </div>
 
@@ -126,7 +129,7 @@ function ServicesSection() {
         <div className="mx-auto mb-12 max-w-2xl space-y-4 text-center">
           <SectionLabel>The 808 website</SectionLabel>
           <h2 className="font-heading text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-4xl">
-            One clear place for customers to understand your business and act.
+            One website that shows customers what you offer and what to do next.
           </h2>
           <p className="text-base leading-relaxed text-muted-foreground">
             Website projects start at K12,000. Every 808 website includes SnapBook, hosting and
@@ -202,11 +205,11 @@ function GroundingSection() {
           </li>
           <li className="sm:border-r sm:border-white/10 sm:px-6">
             <p className="font-heading text-base font-medium">Numbers in Kwacha</p>
-            <p className="mt-2 text-sm text-white/45">Commercial conversations in familiar terms.</p>
+            <p className="mt-2 text-sm text-white/45">Prices and estimates in Kwacha.</p>
           </li>
           <li className="sm:px-6">
             <p className="font-heading text-base font-medium">Direct on WhatsApp</p>
-            <p className="mt-2 text-sm text-white/45">A practical path from the page to a conversation.</p>
+            <p className="mt-2 text-sm text-white/45">Message us directly when you are ready.</p>
           </li>
         </ul>
       </div>

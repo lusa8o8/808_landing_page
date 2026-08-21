@@ -5,7 +5,7 @@ export const marketingServices = defineMarketingServices([
     slug: "booking-systems",
     label: "Booking systems",
     description:
-      "Every 808 website includes SnapBook, giving clients a clear path to request or reserve time.",
+      "SnapBook lets customers choose a service and request a time without back-and-forth messages.",
     intro:
       "SnapBook gives customers one clear path from interest to an appointment request and is included with every 808 website. Deeper scheduling features are added only when the workflow justifies them.",
     bestFor:
@@ -49,7 +49,8 @@ export const marketingServices = defineMarketingServices([
   {
     slug: "local-search-and-maps",
     label: "Local search and maps",
-    description: "Help nearby customers find accurate business information when they search locally.",
+    description:
+      "Keep your services, hours, location, phone number and website clear when nearby customers search.",
     intro:
       "Make your location, services, hours, and contact path easier to understand when a nearby customer is deciding where to go next.",
     bestFor:
@@ -94,7 +95,7 @@ export const marketingServices = defineMarketingServices([
     slug: "service-and-pricing-pages",
     label: "Landing and service pages",
     description:
-      "Give customers one clear place to understand your business, your services, and what to do next.",
+      "Put your services, prices or quote process, location and contact details in one easy place.",
     intro:
       "Turn a scattered list of offers into a clear customer-facing service catalogue, with pricing or quotation language that fits how your business sells.",
     bestFor:
@@ -167,17 +168,17 @@ export const audienceLabels = [
 export const processSteps = defineProcessSteps([
   {
     number: "01",
-    heading: "We start with the numbers",
-    body: "You tell us about your business. We use the numbers to decide whether a website project makes financial sense before defining the scope.",
+    heading: "We check the numbers",
+    body: "Tell us what a customer usually spends and how often they return. We use that to check whether the website is worth the investment.",
   },
   {
     number: "02",
-    heading: "We define and build the right website",
-    body: "We turn approved business facts into a clear website built around how your customers find, understand, and contact you.",
+    heading: "We build what your business needs",
+    body: "You confirm your services, prices, hours, location and contact details. We turn them into a clear website and booking setup.",
   },
   {
     number: "03",
-    heading: "You launch with a supported first year",
-    body: "Your business content and domain remain yours. SnapBook, hosting and routine maintenance are included for the first 365 days at no additional cost.",
+    heading: "You launch ready for customers",
+    body: "Your website goes live with clear ways to call, message or book. Your domain and content remain yours. SnapBook, hosting and routine maintenance are included for the first 365 days at no additional cost.",
   },
 ]);
