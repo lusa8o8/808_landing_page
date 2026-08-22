@@ -9,8 +9,8 @@ export const siteConfig = defineSiteConfig({
   locale: "en_ZM",
   location: "Lusaka, Zambia",
   email: "lusa@eightzeroeight.online",
-  whatsappDisplay: "+260 969 538 047",
-  whatsappHref: "https://wa.me/260969538047",
+  whatsappDisplay: "0772427296",
+  whatsappHref: "https://wa.me/260772427296",
   navigation: [
     { label: "Services", href: "/services" },
     { label: "Calculator", href: "/calculator" },

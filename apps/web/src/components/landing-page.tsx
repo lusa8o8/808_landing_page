@@ -73,9 +73,6 @@ function HeroSection() {
 
         <div className="mx-auto w-full max-w-2xl">
           <LtvChat />
-          <p className="mt-4 text-center text-xs leading-relaxed text-white/45">
-            Answer three short questions to estimate what one returning client is worth each year.
-          </p>
         </div>
       </div>
 

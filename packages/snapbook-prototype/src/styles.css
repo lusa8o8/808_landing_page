@@ -47,6 +47,7 @@
 .slot-button span { color: #61655e; font-size: .82rem; }
 .primary-button, .secondary-button, .danger-button { min-height: 48px; padding: 12px 18px; border-radius: 999px; font-weight: 800; cursor: pointer; }
 .booking-page .primary-button { border: 1px solid var(--snap-accent); background: var(--snap-accent); color: #fff; }
+.booking-page--embed .primary-button { border-color: var(--snap-signal); background: var(--snap-signal); color: var(--snap-accent); }
 .secondary-button { border: 1px solid #cbc9bf; background: #fff; color: var(--snap-accent); }
 .danger-button { border: 1px solid #9b382e; background: #9b382e; color: #fff; }
 .primary-button:disabled { opacity: .45; cursor: not-allowed; }

@@ -55,7 +55,7 @@ test("Organization JSON-LD contains only approved public facts", () => {
     location: "Lusaka, Zambia",
     name: "Eightzeroeight Digital Systems",
     siteUrl,
-    telephone: "+260 969 538 047",
+    telephone: "0772427296",
   });
 
   assert.deepEqual(jsonLd, {
@@ -65,7 +65,7 @@ test("Organization JSON-LD contains only approved public facts", () => {
     name: "Eightzeroeight Digital Systems",
     url: siteUrl,
     email: "lusa@eightzeroeight.online",
-    telephone: "+260 969 538 047",
+    telephone: "0772427296",
     areaServed: { "@type": "City", name: "Lusaka" },
   });
   assert.equal("address" in jsonLd, false);
